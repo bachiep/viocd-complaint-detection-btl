@@ -4,8 +4,8 @@ Mã nguồn tái lập cho bài tập lớn học phần Xử lý ngôn ngữ t�
 
 ## Nội dung kho mã
 
-- `ViOCD_Kaggle_GPU_3seed.ipynb`: notebook chạy từ đầu đến cuối, gồm tiền xử lý, baseline TF-IDF, Linear SVM với Underthesea, tinh chỉnh PhoBERT ba seed trên GPU Kaggle, so sánh ghép cặp, phân tích độ bền và thử nghiệm tăng cường dữ liệu.
-- Notebook không lưu output cell. Mỗi lần chạy tạo kết quả mới trong thư mục `results/`, `results_phobert/` và `results_robustness/`. `results/error_examples.csv` chứa 5 false positive và 5 false negative kèm trích đoạn ngắn để phân tích trong môi trường chạy; tệp này không được commit vào repo.
+- `ViOCD_Kaggle_GPU_3seed.ipynb`: notebook chạy từ đầu đến cuối, gồm tiền xử lý, baseline TF-IDF, Linear SVM với Underthesea, tinh chỉnh PhoBERT ba seed trên GPU Kaggle, so sánh ghép cặp, khảo sát quy mô train (25/50/75/100%), phân tích độ bền và thử nghiệm tăng cường dữ liệu.
+- Notebook không lưu output cell. Mỗi lần chạy tạo kết quả mới trong thư mục `results/`, `results_phobert/` và `results_robustness/`. `results/error_examples.csv` chứa 5 false positive và 5 false negative kèm trích đoạn ngắn để phân tích trong môi trường chạy; tệp này không được commit vào repo. Khảo sát quy mô lưu `learning_curve_runs.csv`, `learning_curve_summary.csv`, manifest các dòng train và biểu đồ; chỉ dùng validation, test không tham gia.
 
 Kho mã không phân phối lại corpus, các dự đoán mẫu, checkpoint hay trọng số đã huấn luyện. Notebook tải corpus theo commit cố định từ nguồn, còn PhoBERT được tải theo revision cố định.
 
