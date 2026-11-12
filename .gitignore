@@ -1,0 +1,25 @@
+# Secrets and local credentials
+.env
+.env.*
+kaggle.json
+**/kaggle.json
+*.pem
+*.key
+
+# Dataset copies and generated artifacts
+/data/
+**/data/
+results/
+results_phobert/
+results_robustness/
+*.csv
+*.pt
+*.pth
+*.pkl
+*.joblib
+*.zip
+
+# Local caches and editor files
+__pycache__/
+.ipynb_checkpoints/
+.cache/
