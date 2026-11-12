@@ -24,19 +24,23 @@ Kho mã không phân phối lại corpus, các dự đoán mẫu, checkpoint hay
 - Hạt giống: 42, 43, 44.
 - Chia train/validation/test, quy tắc lọc trùng và chỉ số đánh giá được cố định trong notebook.
 
-## Kết quả báo cáo
+## Kết quả thực nghiệm
 
 Trên test 546 mẫu, baseline Linear SVM + Underthesea đạt Macro-F1 **91,74%**. PhoBERT đạt trung bình **92,23% ± 0,29 điểm phần trăm SD mẫu** qua ba lượt huấn luyện. Khoảng bootstrap ghép cặp cho chênh lệch PhoBERT so với baseline chứa 0; thí nghiệm chưa xác nhận PhoBERT vượt trội ổn định.
 
 Kiểm tra bỏ dấu dùng phép biến đổi mô phỏng trên cùng tập test, không phải đánh giá trên dữ liệu thiếu dấu tự nhiên. Phân tích cặp chẩn đoán gồm 18 cặp do nhóm tự soạn và chỉ mang tính thăm dò. Xem báo cáo Word/PDF của nhóm để biết đầy đủ số liệu, khoảng tin cậy, giới hạn và cách diễn giải.
 
+
+### Khảo sát quy mô tập huấn luyện
+
+Trên validation cố định, cấu hình C đạt Macro-F1 **88,93% ± 1,71 điểm phần trăm SD mẫu** ở 25% train (1.039 mẫu), **90,86% ± 0,99 điểm** ở 50% (2.078), **91,45% ± 0,58 điểm** ở 75% (3.117), và **92,07%** ở 100% (4.157; một lượt, không có SD). Các mức dưới 100% dùng năm lần lấy mẫu phân tầng theo nhãn với seed 42–46. Đây là biến thiên giữa tập con lấy mẫu, không phải biến thiên khởi tạo mô hình.
 ## Nguồn dữ liệu và giới hạn chia sẻ
 
 Bài báo gốc: Nguyen và cộng sự (2021), *Vietnamese Complaint Detection on E-Commerce Websites*, DOI [10.3233/FAIA210058](https://doi.org/10.3233/FAIA210058). Thẻ dữ liệu Hugging Face nêu mục đích nghiên cứu nhưng không khai báo một giấy phép chuẩn riêng. Nhóm dùng corpus trong phạm vi học thuật, dẫn nguồn và không phát hành lại dữ liệu. Việc sử dụng dữ liệu hoặc trọng số mô hình phải tuân theo điều kiện của chủ sở hữu tương ứng.
 
 ## Bằng chứng chạy thực tế
 
-Các lần chạy Kaggle Run1–Run3 đã dùng GPU Tesla T4. Kernel đang đặt riêng tư; người chấm cần được chủ tài khoản cấp quyền xem/chạy. Repo GitHub này công khai mã nguồn notebook, không thay thế quyền truy cập vào log và output riêng tư trên Kaggle.
+Các lần chạy Kaggle Run1–Run4 đã hoàn tất trên GPU Tesla T4. Run4 bổ sung đầu ra khảo sát quy mô train và mười trích đoạn lỗi sinh trong môi trường chạy. Kernel Run4 [đặt riêng tư](https://www.kaggle.com/code/hiptetsuya/viocd-phobert-gpu-3seed-run4); người chấm cần được chủ tài khoản cấp quyền xem/chạy để kiểm tra log và output. Repo GitHub công khai mã nguồn notebook, không phân phối lại corpus, trích đoạn lỗi, checkpoint hay output riêng tư.
 
 ## Báo cáo
 
