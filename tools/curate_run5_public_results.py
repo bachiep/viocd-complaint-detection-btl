@@ -682,8 +682,21 @@ def main():
         "--kernel-last-run-utc", required=True,
         help="Kaggle run time in ISO-8601 form with an explicit UTC offset.",
     )
+    parser.add_argument(
+        "--confirm-written-rights", action="store_true",
+        help=(
+            "Attest that written permission covers both corpus use and sharing "
+            "the derived aggregate outputs; this script cannot verify the permission."
+        ),
+    )
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
+    if not args.confirm_written_rights:
+        parser.error(
+            "refusing to create corpus-derived public artifacts without written "
+            "permission for corpus use and aggregate sharing; after confirmation, "
+            "pass --confirm-written-rights"
+        )
 
     input_dir = args.input_dir.resolve(strict=True)
     publication_dir = args.output_dir.resolve(strict=False)
