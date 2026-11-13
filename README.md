@@ -5,7 +5,7 @@ Mã nguồn tái lập cho bài tập lớn học phần Xử lý ngôn ngữ t�
 ## Nội dung kho mã
 
 - `ViOCD_Kaggle_GPU_3seed.ipynb`: notebook chạy từ đầu đến cuối, gồm tiền xử lý, baseline TF-IDF, Linear SVM với Underthesea, tinh chỉnh PhoBERT ba seed trên GPU Kaggle, so sánh ghép cặp, khảo sát quy mô train (25/50/75/100%), phân tích độ bền và thử nghiệm tăng cường dữ liệu.
-- Notebook không lưu output cell. Mỗi lần chạy tạo kết quả mới trong thư mục `results/`, `results_phobert/` và `results_robustness/`. `results/error_examples.csv` chứa 5 false positive và 5 false negative kèm trích đoạn ngắn để phân tích trong môi trường chạy; tệp này không được commit vào repo. Khảo sát quy mô lưu `learning_curve_runs.csv`, `learning_curve_summary.csv`, manifest các dòng train và biểu đồ; chỉ dùng validation, test không tham gia.
+- Notebook không lưu output cell. Mỗi lần chạy tạo kết quả mới trong thư mục `results/`, `results_phobert/` và `results_robustness/`. `results/error_examples.csv` chứa 5 false positive và 5 false negative kèm trích đoạn ngắn; chọn theo thứ tự dòng để minh họa nên không đại diện, nhãn vẫn là nhãn corpus và chưa được gán lại độc lập. Tệp này không được commit vào repo. Khảo sát quy mô lưu `learning_curve_runs.csv`, `learning_curve_summary.csv`, manifest các dòng train và biểu đồ; chỉ dùng validation, test không tham gia.
 
 Kho mã không phân phối lại corpus, các dự đoán mẫu, checkpoint hay trọng số đã huấn luyện. Notebook tải corpus theo commit cố định từ nguồn, còn PhoBERT được tải theo revision cố định.
 
@@ -31,6 +31,21 @@ Trên test 546 mẫu, baseline Linear SVM + Underthesea đạt Macro-F1 **91,74%
 Kiểm tra bỏ dấu dùng phép biến đổi mô phỏng trên cùng tập test, không phải đánh giá trên dữ liệu thiếu dấu tự nhiên. Phân tích cặp chẩn đoán gồm 18 cặp do nhóm tự soạn và chỉ mang tính thăm dò. Xem báo cáo Word/PDF của nhóm để biết đầy đủ số liệu, khoảng tin cậy, giới hạn và cách diễn giải.
 
 
+### Tăng cường bỏ dấu và tổng quát hóa theo miền
+
+F0 lặp lại dữ liệu có dấu; F1 ghép dữ liệu gốc với bản bỏ dấu, mỗi điều kiện có 8.314 dòng huấn luyện. Chênh lệch F1 là F1_accent_augmentation trừ F0_clean_duplicate, với bootstrap ghép cặp phân tầng 2.000 lần trên test cố định: test sạch **−0,73 điểm %** (CI95 **[−1,84; +0,37]**); test bỏ dấu mô phỏng **+10,86 điểm %** (CI95 **[+7,75; +14,17]**); sensitivity sau khi loại bốn dòng va chạm sau bỏ dấu (N=542) **+10,95 điểm %** (CI95 **[+7,78; +14,39]**). Khoảng của test sạch chứa 0; kết quả không chứng minh lợi ích trên dữ liệu thiếu dấu tự nhiên.
+
+Đánh giá giữ riêng miền loại toàn bộ ví dụ train thuộc miền được chấm, rồi đo trên các dòng test của miền đó. Macro-F1 của C_word và E_word_char:
+
+| Miền | N test | C_word | E_word_char |
+|---|---:|---:|---:|
+| app | 194 | 75,81% | 75,52% |
+| cosmetic | 149 | 78,81% | 79,93% |
+| fashion | 157 | 85,42% | 84,01% |
+| mobile | 46 | 89,73% | 89,28% |
+
+Đây là phân tích hậu nghiệm trên test cố định, không phải xác nhận ngoài miền độc lập; kết quả mobile cần thận trọng vì chỉ có 46 mẫu. CSV/JSON cùng manifest tái lập nằm trong `results_robustness/`.
+
 ### Khảo sát quy mô tập huấn luyện
 
 Trên validation cố định, cấu hình C đạt Macro-F1 **88,93% ± 1,71 điểm phần trăm SD mẫu** ở 25% train (1.039 mẫu), **90,86% ± 0,99 điểm** ở 50% (2.078), **91,45% ± 0,58 điểm** ở 75% (3.117), và **92,07%** ở 100% (4.157; một lượt, không có SD). Các mức dưới 100% dùng năm lần lấy mẫu phân tầng theo nhãn với seed 42–46. Đây là biến thiên giữa tập con lấy mẫu, không phải biến thiên khởi tạo mô hình.
@@ -40,7 +55,7 @@ Bài báo gốc: Nguyen và cộng sự (2021), *Vietnamese Complaint Detection 
 
 ## Bằng chứng chạy thực tế
 
-Các lần chạy Kaggle Run1–Run4 đã hoàn tất trên GPU Tesla T4. Run4 bổ sung đầu ra khảo sát quy mô train và mười trích đoạn lỗi sinh trong môi trường chạy. Kernel Run4 [đặt riêng tư](https://www.kaggle.com/code/hiptetsuya/viocd-phobert-gpu-3seed-run4); người chấm cần được chủ tài khoản cấp quyền xem/chạy để kiểm tra log và output. Repo GitHub công khai mã nguồn notebook, không phân phối lại corpus, trích đoạn lỗi, checkpoint hay output riêng tư.
+Các lần chạy Kaggle Run1–Run4 đã hoàn tất trên GPU Tesla T4. Run4 phiên bản 4 sửa helper CI tăng cường bỏ dấu; chỉ output v4 là nguồn có thẩm quyền cho các CI này. Run3 và Run4 phiên bản 1–3 được lưu làm lịch sử, không dùng CI tăng cường bỏ dấu của chúng. Run4 cũng có khảo sát quy mô train và mười trích đoạn lỗi sinh trong môi trường chạy. Kernel Run4 [đặt riêng tư](https://www.kaggle.com/code/hiptetsuya/viocd-phobert-gpu-3seed-run4); người chấm cần được chủ tài khoản cấp quyền xem/chạy để kiểm tra log và output. Repo GitHub công khai mã nguồn notebook, không phân phối lại corpus, trích đoạn lỗi, checkpoint hay output riêng tư.
 
 ## Báo cáo
 
