@@ -1,0 +1,26 @@
+[
+  {
+    "seed": 42,
+    "test_rows": 624,
+    "predictions_identical_to_saved": true,
+    "base_model_revision": "01daacda68afe13d83023d16ec647239e344a1e6",
+    "max_length": 128,
+    "micro_batch": 8
+  },
+  {
+    "seed": 43,
+    "test_rows": 624,
+    "predictions_identical_to_saved": true,
+    "base_model_revision": "01daacda68afe13d83023d16ec647239e344a1e6",
+    "max_length": 128,
+    "micro_batch": 8
+  },
+  {
+    "seed": 44,
+    "test_rows": 624,
+    "predictions_identical_to_saved": true,
+    "base_model_revision": "01daacda68afe13d83023d16ec647239e344a1e6",
+    "max_length": 128,
+    "micro_batch": 8
+  }
+]

@@ -1,0 +1,4 @@
+/results_public/run5_train_holdout_*.csv text eol=lf
+/results_public/run5_train_holdout_*.json text eol=lf
+/tools/curate_run5_public_results.py text eol=lf
+/ViOCD_Kaggle_Run5_TrainDerivedHoldout_GPU_3seed.ipynb text eol=lf

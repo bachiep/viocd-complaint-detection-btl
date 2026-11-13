@@ -1,0 +1,96 @@
+{
+  "phobert": {
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "test_unaccented_rows": 624,
+    "accent_overlap_rows": 2,
+    "sensitivity_rows": 622,
+    "metrics": {
+      "clean_test_macro_f1": {
+        "mean": 0.8988000123755852,
+        "sd_sample": 0.00690632336441228
+      },
+      "unaccented_test_macro_f1": {
+        "mean": 0.6674663808221806,
+        "sd_sample": 0.0315388991750132
+      },
+      "unaccented_test_accuracy": {
+        "mean": 0.6688034188034188,
+        "sd_sample": 0.029823771051726147
+      },
+      "sensitivity_macro_f1": {
+        "mean": 0.6664562660551964,
+        "sd_sample": 0.03151052752789672
+      },
+      "challenge_pairs_correct": {
+        "mean": 10.0,
+        "sd_sample": 2.0
+      }
+    }
+  },
+  "accent_augmentation": {
+    "models": {
+      "F0_clean_duplicate": {
+        "training_rows": 6234,
+        "val_clean": 0.8980963045912654,
+        "val_unaccented": 0.8012260214903386,
+        "test_clean": 0.9030654515327258,
+        "test_unaccented": 0.7960636211780086,
+        "test_unaccented_sensitivity": 0.7952600394996708,
+        "sensitivity_test_n": 622,
+        "accent_overlap_test_n": 2
+      },
+      "F1_accent_augmentation": {
+        "training_rows": 6234,
+        "val_clean": 0.9078852294711326,
+        "val_unaccented": 0.8888450010455633,
+        "test_clean": 0.8934326967862133,
+        "test_unaccented": 0.8694516836403929,
+        "test_unaccented_sensitivity": 0.8689616966159752,
+        "sensitivity_test_n": 622,
+        "accent_overlap_test_n": 2
+      }
+    },
+    "paired_uncertainty": {
+      "clean": {
+        "test_rows": 624,
+        "macro_f1_difference": -0.009632754746512484,
+        "bootstrap_difference_ci95": [
+          -0.01922967390897661,
+          -0.0014849729274299768
+        ],
+        "bootstrap_samples": 2000,
+        "correct_difference": -6
+      },
+      "unaccented": {
+        "test_rows": 624,
+        "macro_f1_difference": 0.07338806246238438,
+        "bootstrap_difference_ci95": [
+          0.04557556728187932,
+          0.10278294252351733
+        ],
+        "bootstrap_samples": 2000,
+        "correct_difference": 45
+      },
+      "unaccented_sensitivity": {
+        "test_rows": 622,
+        "macro_f1_difference": 0.07370165711630439,
+        "bootstrap_difference_ci95": [
+          0.04566979642158773,
+          0.10329265907955215
+        ],
+        "bootstrap_samples": 2000,
+        "correct_difference": 45
+      }
+    },
+    "interpretation": "Synthetic accent-removal robustness test; not natural unaccented data."
+  },
+  "synthetic_diagnostic_pairs": {
+    "mean": 10.0,
+    "sd_sample": 2.0
+  },
+  "interpretation": "post-hoc exploratory evaluation on the fixed test split and synthetic diagnostic pairs; not independent out-of-domain confirmation"
+}

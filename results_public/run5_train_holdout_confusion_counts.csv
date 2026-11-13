@@ -1,0 +1,7 @@
+configuration,seed,n,tn,fp,fn,tp
+A_LogReg_space,,624,244,46,27,307
+B_SVM_space,,624,253,37,27,307
+C_SVM_segmented,,624,251,39,28,306
+D_PhoBERT,42,624,266,24,44,290
+D_PhoBERT,43,624,262,28,32,302
+D_PhoBERT,44,624,269,21,40,294

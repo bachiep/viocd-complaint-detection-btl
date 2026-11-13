@@ -23,7 +23,7 @@ results_robustness/
 __pycache__/
 .ipynb_checkpoints/
 .cache/
-# Exploratory Run5 notebook is kept local until its evidence is formally reviewed.
+# Original Run5 notebook is retained locally as executed-source evidence; the reviewed copy is public.
 /ViOCD_Kaggle_Fresh_Holdout_GPU_3seed.ipynb
 # Curated aggregate-only results reviewed for public release
 !/results_public/
@@ -48,3 +48,14 @@ results_public/*
 !results_public/provenance.json
 !results_public/robustness_summary.json
 !results_public/sequence_length_audit.csv
+!results_public/run5_train_holdout_model_metrics.csv
+!results_public/run5_train_holdout_seed_metrics.csv
+!results_public/run5_train_holdout_domain_metrics.csv
+!results_public/run5_train_holdout_learning_curve.csv
+!results_public/run5_train_holdout_sequence_length.csv
+!results_public/run5_train_holdout_confusion_counts.csv
+!results_public/run5_train_holdout_summary.json
+!results_public/run5_train_holdout_robustness.json
+!results_public/run5_train_holdout_checkpoint_restore.json
+!results_public/run5_train_holdout_environment.json
+!results_public/run5_train_holdout_provenance.json

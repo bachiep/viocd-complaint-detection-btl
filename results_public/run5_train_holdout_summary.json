@@ -1,0 +1,142 @@
+{
+  "dataset_commit": "25e1851683ebc407d28e5a2d514b7ae0eadd4e4b",
+  "data_and_split": {
+    "selected_baseline_by_validation": "C_SVM_segmented",
+    "splits": {
+      "train": {
+        "retained": 3117,
+        "labels": {
+          "0": 1445,
+          "1": 1672
+        },
+        "domains": {
+          "app": 1204,
+          "fashion": 887,
+          "cosmetic": 762,
+          "mobile": 264
+        },
+        "whitespace_units": 93637,
+        "median_length": 20.0,
+        "p95_length": 76.0
+      },
+      "val": {
+        "retained": 416,
+        "labels": {
+          "0": 193,
+          "1": 223
+        },
+        "domains": {
+          "app": 161,
+          "fashion": 118,
+          "cosmetic": 102,
+          "mobile": 35
+        },
+        "whitespace_units": 12027,
+        "median_length": 19.0,
+        "p95_length": 76.0
+      },
+      "test": {
+        "retained": 624,
+        "labels": {
+          "0": 290,
+          "1": 334
+        },
+        "domains": {
+          "app": 240,
+          "fashion": 178,
+          "cosmetic": 152,
+          "mobile": 54
+        },
+        "whitespace_units": 18171,
+        "median_length": 20.0,
+        "p95_length": 76.0
+      }
+    },
+    "cleaned_original_train_pool": {
+      "raw": 4387,
+      "missing": 0,
+      "blank": 0,
+      "conflict_rows": 2,
+      "duplicate_rows": 153,
+      "overlap_rows": 75,
+      "retained": 4157,
+      "labels": {
+        "0": 1928,
+        "1": 2229
+      },
+      "domains": {
+        "app": 1605,
+        "fashion": 1183,
+        "cosmetic": 1016,
+        "mobile": 353
+      },
+      "whitespace_units": 123835,
+      "median_length": 20.0,
+      "p95_length": 76.0
+    },
+    "split_protocol": {
+      "source_partition": "original_train_only",
+      "source_pool_rows": 4157,
+      "split_seed": 20261113,
+      "second_split_seed": 20261114,
+      "requested_ratio": {
+        "train": 0.75,
+        "val": 0.1,
+        "test": 0.15
+      },
+      "stratification": "label × domain",
+      "actual_counts": {
+        "train": 3117,
+        "val": 416,
+        "test": 624
+      },
+      "legacy_validation_test_use": "only normalized-text overlap filtering; excluded from Run5 fitting, selection, and scoring",
+      "segmented_pool_unique": true
+    },
+    "segmented_overlap_audit": [
+      {
+        "split": "test",
+        "rows": 624,
+        "within_split_duplicate_segmented_rows": 0,
+        "cross_split_segmented_overlap_rows": 0,
+        "within_split_segment_label_conflict_rows": 0,
+        "cross_split_segment_label_conflict_rows": 0
+      },
+      {
+        "split": "val",
+        "rows": 416,
+        "within_split_duplicate_segmented_rows": 0,
+        "cross_split_segmented_overlap_rows": 0,
+        "within_split_segment_label_conflict_rows": 0,
+        "cross_split_segment_label_conflict_rows": 0
+      },
+      {
+        "split": "train",
+        "rows": 3117,
+        "within_split_duplicate_segmented_rows": 0,
+        "cross_split_segmented_overlap_rows": 0,
+        "within_split_segment_label_conflict_rows": 0,
+        "cross_split_segment_label_conflict_rows": 0
+      }
+    ]
+  },
+  "comparison": {
+    "baseline_configuration": "C_SVM_segmented",
+    "test_rows": 624,
+    "baseline_macro_f1": 0.8917875196388776,
+    "phobert_mean_seed_macro_f1": 0.8988000123755852,
+    "observed_mean_difference": 0.007012492736707565,
+    "paired_bootstrap_ci95": [
+      -0.01785242810245596,
+      0.03217766850548488
+    ],
+    "bootstrap_samples": 2000,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "interpretation": "conditional paired interval for the mean of three trained seeds on the fixed train-derived internal holdout"
+  },
+  "evaluation_scope": "Post-hoc train-derived internal holdout; not independent confirmation."
+}

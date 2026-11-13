@@ -1,8 +1,8 @@
 {
   "README.md": {
-    "mtime": 1794549780.5499947,
-    "seen": 1794551092.089153,
-    "ast_hash": "d57c4d2483dec683cb77d14c672c6799",
+    "mtime": 1794568156.9976132,
+    "seen": 1794568210.5345194,
+    "ast_hash": "ba4ba4aec2cf019ac30bcf494adbc671",
     "semantic_hash": ""
   },
   "results_public/accent_augmentation.json": {
@@ -12,8 +12,8 @@
     "semantic_hash": ""
   },
   "results_public/accent_augmentation_uncertainty_summary.json": {
-    "mtime": 1794547909.1195607,
-    "seen": 1794548177.8282743,
+    "mtime": 1794552387.4539175,
+    "seen": 1794554743.1102545,
     "ast_hash": "9db620cb776447931b2d54f3d7f32354",
     "semantic_hash": ""
   },
@@ -42,9 +42,9 @@
     "semantic_hash": ""
   },
   "results_public/provenance.json": {
-    "mtime": 1794548127.1908765,
-    "seen": 1794548177.8282843,
-    "ast_hash": "b3d70b2622d96dbb5ff2f73c597f8c6a",
+    "mtime": 1794552387.5059144,
+    "seen": 1794554743.1102684,
+    "ast_hash": "acc24879817fdcb4b4f65416f8d75b1f",
     "semantic_hash": ""
   },
   "results_public/robustness_summary.json": {
@@ -54,9 +54,9 @@
     "semantic_hash": ""
   },
   "results_public/README.md": {
-    "mtime": 1794547909.1215134,
-    "seen": 1794548177.8282902,
-    "ast_hash": "e4e0ba5a3cb873d04fc6b43eccc5bc79",
+    "mtime": 1794568483.327186,
+    "seen": 1794568758.505719,
+    "ast_hash": "9ff79044c0aa81d9e9c50164b55aa4bd",
     "semantic_hash": ""
   },
   "results_public/evaluation.png": {
@@ -75,6 +75,42 @@
     "mtime": 1794548326.625202,
     "seen": 1794551092.0891557,
     "ast_hash": "c72c29bfae96e0053309b4d1e2e01f4a",
+    "semantic_hash": ""
+  },
+  "results_public/run5_train_holdout_checkpoint_restore.json": {
+    "mtime": 1794568751.906406,
+    "seen": 1794568758.5057006,
+    "ast_hash": "70f53bd17d4596b6f469183058fadce3",
+    "semantic_hash": ""
+  },
+  "results_public/run5_train_holdout_environment.json": {
+    "mtime": 1794568751.9070473,
+    "seen": 1794568758.5057034,
+    "ast_hash": "b926ee60f677e15c8bbe38fb4929e8f6",
+    "semantic_hash": ""
+  },
+  "results_public/run5_train_holdout_provenance.json": {
+    "mtime": 1794568751.9198258,
+    "seen": 1794568758.5057058,
+    "ast_hash": "fec08eb3c3f4af3dbba01148259c1e9f",
+    "semantic_hash": ""
+  },
+  "results_public/run5_train_holdout_robustness.json": {
+    "mtime": 1794568751.9053004,
+    "seen": 1794568758.5057077,
+    "ast_hash": "981f25e322fc712260e2c93dfd909a7b",
+    "semantic_hash": ""
+  },
+  "results_public/run5_train_holdout_summary.json": {
+    "mtime": 1794568751.9053004,
+    "seen": 1794568758.50571,
+    "ast_hash": "df0d2c5614786be6911a6ca2423c53f6",
+    "semantic_hash": ""
+  },
+  "tools/curate_run5_public_results.py": {
+    "mtime": 1794568705.5550747,
+    "seen": 1794568758.5057118,
+    "ast_hash": "b80cc6d8f0a6d1e755f905fcdcadff9a",
     "semantic_hash": ""
   }
 }

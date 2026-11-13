@@ -1,0 +1,90 @@
+{
+  "artifact_label": "run5_v5",
+  "kernel": "hiptetsuya/viocd-phobert-fresh-holdout-run5",
+  "kernel_status": "COMPLETE",
+  "kernel_last_run_utc": "2026-11-13T08:03:14.117Z",
+  "accelerator": "Tesla T4",
+  "private_kernel": true,
+  "downloaded_output_file_count": 73,
+  "dataset_commit": "25e1851683ebc407d28e5a2d514b7ae0eadd4e4b",
+  "dataset_csv_sha256": {
+    "test": "785ff570dffa4369873617846029b32d16ee5cf68926073509cf09c1387cbca7",
+    "train": "1aef356a7ca837cd8ff216ce25abf323dbf5606e1ffd111c0800e4ec5a0c372e",
+    "val": "4dffb1a6efbe1a8ce1232cad750d3df4408c0077de5a2c9aa406e4186c05c652"
+  },
+  "model": "vinai/phobert-base",
+  "model_revision": "01daacda68afe13d83023d16ec647239e344a1e6",
+  "run5_split_manifest_sha256": "dd9b12522abf52a5493b88c0cf5bfde758caf3eaba26cbf073c9c56a48a4a2e1",
+  "source_notebooks": {
+    "execution_source_file_sha256": "3c22199ee4a363f4e13a026fe4c7c2afb8108b4555ac76837e6e3fb4e420ba36",
+    "kaggle_pulled_source_file_sha256": "ebd87360f5e4929eb8f0636eb19b2062e5b8093acb962ee2e4e3f261467f3575",
+    "published_notebook_file_sha256": "9abb76e6251b9b78c7e86706847a0f0cf24b4417c79fe480cdd69593395b4853",
+    "curation_script_sha256": "0fcd695d9e97d6ba9877c0de87e59ed006226755b6aa5aaefeb9d7754a8a713a",
+    "execution_source_cell_sha256": "b3c160d751bd56224e09dd4abf29a98eafea0de5d1694bf431f79e5b17dd0cbb",
+    "kaggle_pulled_source_cell_sha256": "b3c160d751bd56224e09dd4abf29a98eafea0de5d1694bf431f79e5b17dd0cbb",
+    "published_source_cell_sha256": "b70f3ee849bdd0e0947971821523defc8845ae5c958c76ad0f364a9eedeaf6e1",
+    "execution_code_cell_sha256": "ae0473e05ad1bb24269eb881f01f60c64e9c9c802d5b60ad38b22a0e6d02adb2",
+    "published_code_cell_sha256": "dad7e67fd04a9cf3d9100e7f84eb5510ab91d919ccea57ed8ce3fad4e41363c2",
+    "source_cell_hash_method": "SHA-256 over canonical JSON of ordered cell-type/source entries, UTF-8 encoded.",
+    "code_cell_hash_method": "SHA-256 over canonical JSON of ordered executable-cell type/source entries, UTF-8 encoded.",
+    "submitted_and_pulled_code_cells_identical": true,
+    "functional_ast_sha256_docstrings_removed": "7f7b55b4f2d99fb9ea8bff267f20b0415cfa6813b9ed439b108be5ffd98b13a3",
+    "functional_ast_hash_method": "AST dumps of executable cells after replacing Jupyter magic lines with pass and removing docstrings; cells joined with newline.",
+    "published_functional_ast_matches_execution": true,
+    "published_notebook_contains_saved_outputs": false,
+    "published_changes_are_documentation_only": true,
+    "published_documentation_changes": {
+      "markdown_cell_indices": [
+        0,
+        2,
+        11
+      ],
+      "markdown_cell_sha256": {
+        "0": "62f6efc6b5dd1fe3714bb734d1f6515582eac7eac6b22ac3ab20e650188235b9",
+        "2": "602122d4921e79b67ca2124f406ee3690130d494ab219af693e041ffa1043ade",
+        "11": "3639515c9be901adf7898f6188fb7a65b6d7518d2c9f8554909b39a7cba39af6"
+      },
+      "code_cell_change": "Cell 3 module docstring narrowed to CPU-based classical baselines."
+    }
+  },
+  "methodology_limitations": [
+    "All Run5 partitions were drawn from the cleaned original-training pool; every row in that pool was previously used in Run4 supervised training.",
+    "The same Run5 split was reused across versions v1-v5.",
+    "A local preflight displayed partial text and source-row indices that can be linked to public labels; Run5 is not a blind independent confirmation."
+  ],
+  "public_release": {
+    "raw_review_text": false,
+    "row_ids": false,
+    "per_row_predictions": false,
+    "model_checkpoints": false,
+    "aggregate_artifacts_sha256": {
+      "run5_train_holdout_model_metrics.csv": "444baf057feffa3a09aa07c1e0197e5a8c343fee939ad12acad76a59504aa01d",
+      "run5_train_holdout_seed_metrics.csv": "ba9db12d953c93b51be8a6a1a9ec0647ae52cabb8c8a66431c810cf9509b0f41",
+      "run5_train_holdout_domain_metrics.csv": "d6d8a93bca3936134b85743e2e4b7d5d0f2a725260a0d4d9ae084f336fa4a767",
+      "run5_train_holdout_learning_curve.csv": "ec3ba6924b19c8865f35104e247ebbb4a129e0f3a2c4edbf0315470f6bd60d97",
+      "run5_train_holdout_sequence_length.csv": "9cc1330eddcddaf36021e6549f965b2aa367807737e2b22c0f68f77b8eaeb995",
+      "run5_train_holdout_confusion_counts.csv": "06485a4d88ca679a541e9cd567bfb273d2f6df155e45a933c7270283ae54cb21",
+      "run5_train_holdout_summary.json": "cc3e204231062b155e28b95a18c4f4a7f56a2f49a9ded70f281fa473d0402a87",
+      "run5_train_holdout_robustness.json": "7ffc74fcb0b810b6f6d71983818bef754b9dfaeb430b9db68d75a641d8bd33a2",
+      "run5_train_holdout_checkpoint_restore.json": "6b96bb204e5a0d31285305830b9f6f82e287a50caf42faa8864a190670a20014",
+      "run5_train_holdout_environment.json": "3a9e8fbf3947c90b1165666c3e12b5f8a354a694d1525689e1c15635b85bbba7"
+    }
+  },
+  "curated_source_artifacts_sha256": {
+    "results/summary.json": "4dff639a5222172eabda5699234ed6fb262101d06a9787e36986e3b53ae22b9a",
+    "results/metrics.csv": "50faca5c267ff9adbdf1ba423d7b92c414a20fbc18aaeffdb40c1d0d862d6180",
+    "results/baseline_all_test_predictions.csv": "f1ca91247477c6c91ff7f206a6c864bc03dadda52df401aa01d1118a60999a7d",
+    "results_phobert/comparison.csv": "9ec7ef4f6045fbec543a62634824569802a2c048214dc8d199ce3396c2dafc57",
+    "results_phobert/seed_metrics.csv": "ba9db12d953c93b51be8a6a1a9ec0647ae52cabb8c8a66431c810cf9509b0f41",
+    "results_phobert/paired_bootstrap.json": "fcc88ca75e170a18a95998b8d15136a4f2a0d4a3c057216b362c1dff47e86a4b",
+    "results_phobert/per_domain_metrics.csv": "d6d8a93bca3936134b85743e2e4b7d5d0f2a725260a0d4d9ae084f336fa4a767",
+    "results/learning_curve_summary.csv": "ec3ba6924b19c8865f35104e247ebbb4a129e0f3a2c4edbf0315470f6bd60d97",
+    "results_phobert/sequence_length_audit.csv": "9cc1330eddcddaf36021e6549f965b2aa367807737e2b22c0f68f77b8eaeb995",
+    "results_phobert/environment.json": "c39cf46ae898ff166176eea462ed385535030cb2826f9f27f14b4398a40c7ff7",
+    "results_phobert/checkpoint_restore_verification.json": "8a079307be93587bbc622e5aca0b662082ae8b5845fe83fed1bf22a34b553e96",
+    "results_phobert/robustness_summary.json": "aff09506fe27a792dc25b9036ea1bb61f014f13096179f2fe35df5b48b402645",
+    "results_robustness/accent_augmentation.json": "b660bd9b2f0b32e4aedb8ec04f99fda7cc6f3c840768c0b87d540d7c3a36d1e8",
+    "results_robustness/accent_augmentation_uncertainty.json": "659069448f6cec79a96100e395e7c07d19d3075ca2eb39017330917edc700d95",
+    "results/split_manifest_private.json": "dd9b12522abf52a5493b88c0cf5bfde758caf3eaba26cbf073c9c56a48a4a2e1"
+  }
+}
