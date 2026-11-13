@@ -42,9 +42,9 @@ Trên test chính thức 546 mẫu của Run4, baseline Linear SVM + Underthesea
 
 ### Run5 — holdout nội bộ train-derived bổ sung
 
-Run5 chọn baseline bằng Macro-F1 validation và chọn epoch PhoBERT bằng validation; baseline C và ba seed PhoBERT được chấm trên cùng 624 mẫu. Baseline C đạt Macro-F1 **89,18%**; PhoBERT đạt **89,88% ± 0,69 điểm phần trăm SD**. Chênh lệch ghép cặp là **+0,70 điểm phần trăm**, CI bootstrap 95% **[−1,79; +3,22] điểm**, nên chưa chứng minh mô hình nào vượt trội.
+Run5 chọn baseline bằng Macro-F1 validation và chọn epoch PhoBERT bằng validation; baseline C và ba seed PhoBERT được chấm trên cùng 624 mẫu. Baseline C đạt Macro-F1 **89,18%**; PhoBERT đạt **89,88% ± 0,69 điểm phần trăm SD**. Chênh lệch ghép cặp là **+0,70 điểm phần trăm**, CI bootstrap 95% **[−1,79; +3,22] điểm phần trăm**, nên chưa chứng minh mô hình nào vượt trội.
 
-Run5 lấy pool từ 4.157 mẫu train gốc sau làm sạch, rồi chia 3.117/416/624 train/validation/test theo nhãn × miền; loại 75 dòng trùng văn bản với validation/test cũ. Cả ba partition Run5 đều lấy từ pool này, và toàn bộ pool đã được dùng huấn luyện Run4. Cùng split Run5 được chạy/kiểm tra qua các phiên bản v1–v5; một preflight cục bộ cũng làm lộ một phần văn bản cùng chỉ số dòng có thể liên kết tới nhãn công khai. Vì thế Run5 là phân tích hậu nghiệm nội bộ, không phải holdout độc lập ở cấp dự án. Không gộp hai bộ điểm và không dùng chúng để khẳng định PhoBERT tốt hơn.
+Run5 lấy pool từ 4.157 mẫu train gốc sau làm sạch, rồi chia 3.117/416/624 train/validation/test theo nhãn × miền; loại 75 dòng trùng văn bản với validation/test cũ. Cả ba partition Run5 đều lấy từ pool này, và toàn bộ pool đã được dùng huấn luyện Run4. Cùng split Run5 được dùng qua các phiên bản v1–v5 (v1 chưa hoàn tất; v2–v5 hoàn tất đủ ba seed); một preflight cục bộ cũng làm lộ một phần văn bản cùng chỉ số dòng có thể liên kết tới nhãn công khai. Vì thế Run5 là phân tích hậu nghiệm nội bộ, không phải holdout độc lập ở cấp dự án. Không gộp hai bộ điểm và không dùng chúng để khẳng định PhoBERT tốt hơn.
 
 Các metric Run5, bootstrap, confusion counts, theo miền, learning curve, độ dài token, robustness và provenance tổng hợp nằm trong `results_public/run5_train_holdout_*`. Bảng nguồn cấp từng mẫu vẫn được giữ riêng tư.
 
