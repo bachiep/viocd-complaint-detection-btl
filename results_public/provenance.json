@@ -21,14 +21,31 @@
     "seed_42_checkpoint_cached_with_explicit_release": true
   },
   "source_cell_sha256_scope": "Kaggle kernel version 10 executed source notebook.",
-  "published_notebook_source_cell_sha256": "dd87097b98c9632360bfd591ab3d86b4a51ab37d835385034d0f552780dd0865",
-  "published_notebook_code_source_sha256": "e0c92e8694d5bdd63b367f635a6b49055536034294827240ced9cbbf535c3a4b",
-  "published_functional_ast_sha256_docstrings_removed": "72357b00cfdedca81edcfe6894fcb27573d37d10c678b39300bb76892f023e94",
+  "published_notebook_source_cell_sha256": "2f9edac9911e09692fac5f45d33d68ac944f5bc5d262313d83c94b9c90fbcaf7",
+  "published_notebook_code_source_sha256": "1cfdcc31794751b2e7ad4c4384d54636f4d2fabb77a82e109ee87ae43fcf74be",
+  "published_functional_ast_sha256_docstrings_removed": "23b195999eff9299f40c910580c178e8ad8ec94649411110d914ebb8498c6535",
   "published_notebook_post_run_correction": {
     "cell_index_zero_based": 3,
     "cell_id": "pipeline code",
     "change": "Corrected the module docstring to distinguish CPU baselines from CUDA PhoBERT.",
     "executable_logic_changed": false
   },
-  "functional_ast_hash_method": "AST dump of ordered executable cells after replacing notebook magic lines with pass and stripping module/function/class docstrings; implemented by tools/curate_run5_public_results.py."
+  "functional_ast_hash_method": "AST dump of ordered executable cells after replacing notebook magic lines with pass and stripping module/function/class docstrings; implemented by tools/curate_run5_public_results.py.",
+  "published_notebook_file_sha256": "6244172c9b5e4dff31051bd9c08bb19fc590e34eed19578e2141dee5f30ea317",
+  "published_notebook_post_run_patches": [
+    {
+      "cell_index_zero_based": 0,
+      "kind": "markdown",
+      "change": "Clarified that normalized text detects duplicates/overlaps while labels detect conflicting labels."
+    },
+    {
+      "cell_index_zero_based": 17,
+      "kind": "posthoc_analysis",
+      "change": "Replaced fixed test-row identifiers and row-specific notes with deterministic sampling of up to two current examples per transition type; does not alter fitting, predictions, or primary metrics."
+    }
+  ],
+  "source_cell_sha256_method": "SHA-256 over UTF-8 bytes of ordered cell source strings concatenated without separators; this records the Kaggle-executed Run4 source.",
+  "published_notebook_source_cell_sha256_method": "SHA-256 over UTF-8 bytes of ordered cell source strings concatenated without separators.",
+  "published_notebook_code_source_sha256_method": "SHA-256 over UTF-8 bytes of ordered executable-cell source strings concatenated without separators.",
+  "published_notebook_file_sha256_method": "SHA-256 of the published notebook file after normalizing CRLF and CR line endings to LF, matching Git-published bytes."
 }

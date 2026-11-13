@@ -43,6 +43,21 @@ EXPECTED_MARKDOWN_CELL_SHA256 = {
     2: "602122d4921e79b67ca2124f406ee3690130d494ab219af693e041ffa1043ade",
     11: "3639515c9be901adf7898f6188fb7a65b6d7518d2c9f8554909b39a7cba39af6",
 }
+RUN5_DOCSTRING_BEFORE = '"""Run the UIT-ViOCD complaint detection experiment on CPU."""'
+RUN5_DOCSTRING_AFTER = '"""Prepare splits and evaluate CPU-based classical baselines."""'
+RUN5_PLOT_BEFORE = "\n".join((
+    '    ax.set(xlabel="Tỷ lệ tập train (n = số mẫu; k = số lượt)", ylabel="Macro-F1 validation (%)",',
+    '           title="Khảo sát quy mô tập huấn luyện", xticks=x, xticklabels=tick_labels,',
+    '           xlim=(18, 110), ylim=(87, 93.5))',
+))
+RUN5_PLOT_AFTER = "\n".join((
+    '    y_min = float(np.min(y - sd))',
+    '    y_max = float(np.max(y + sd))',
+    '    y_padding = max(0.5, (y_max - y_min) * 0.12)',
+    '    ax.set(xlabel="Tỷ lệ tập train (n = số mẫu; k = số lượt)", ylabel="Macro-F1 validation (%)",',
+    '           title="Khảo sát quy mô tập huấn luyện", xticks=x, xticklabels=tick_labels,',
+    '           xlim=(18, 110), ylim=(y_min - y_padding, y_max + y_padding))',
+))
 
 
 def read_json(path):
@@ -171,6 +186,11 @@ def sha256_file(path):
     return sha256_bytes(path.read_bytes())
 
 
+def sha256_normalized_text_file(path):
+    content = Path(path).read_bytes().replace(b"\r\n", b"\n").replace(b"\r", b"\n")
+    return sha256_bytes(content)
+
+
 def notebook_cells(path):
     notebook = read_json(path)
     return notebook, ["".join(cell.get("source", [])) for cell in notebook["cells"]]
@@ -230,14 +250,12 @@ def functional_ast_hash(path):
     return sha256_bytes("\n".join(trees).encode("utf-8"))
 
 
-def assert_documentation_only(execution_notebook, published_notebook):
+def assert_reviewed_publication_changes(execution_notebook, published_notebook):
     execution, execution_sources = notebook_cells(execution_notebook)
     published, published_sources = notebook_cells(published_notebook)
     if len(execution_sources) != len(published_sources):
         raise ValueError("Published notebook cell count differs from the executed source.")
 
-    old_docstring = '"""Run the UIT-ViOCD complaint detection experiment on CPU."""'
-    new_docstring = '"""Prepare splits and evaluate CPU-based classical baselines."""'
     code_changes = []
     markdown_changes = []
     for index, (left, right) in enumerate(zip(execution["cells"], published["cells"])):
@@ -250,17 +268,26 @@ def assert_documentation_only(execution_notebook, published_notebook):
             if left.get("cell_type") != "markdown":
                 raise ValueError("Published notebook changes a non-markdown, non-code cell.")
             markdown_changes.append(index)
-    if markdown_changes != list(EXPECTED_MARKDOWN_CELL_SHA256):
+    if markdown_changes and markdown_changes != list(EXPECTED_MARKDOWN_CELL_SHA256):
         raise ValueError("Published notebook Markdown changes differ from the reviewed cells.")
-    for index, expected_hash in EXPECTED_MARKDOWN_CELL_SHA256.items():
+    for index in markdown_changes:
+        expected_hash = EXPECTED_MARKDOWN_CELL_SHA256[index]
         actual_hash = sha256_bytes(published_sources[index].encode("utf-8"))
         if actual_hash != expected_hash:
             raise ValueError(f"Published notebook Markdown cell {index} differs from the reviewed text.")
-    if len(code_changes) != 1:
-        raise ValueError("Expected only the CPU-baseline docstring to change in code cells.")
-    _, before, after = code_changes[0]
-    if old_docstring not in before or before.replace(old_docstring, new_docstring, 1) != after:
-        raise ValueError("Published executable-cell edit is not the reviewed docstring correction.")
+
+    allowed_code_patches = {
+        3: (RUN5_DOCSTRING_BEFORE, RUN5_DOCSTRING_AFTER),
+        6: (RUN5_PLOT_BEFORE, RUN5_PLOT_AFTER),
+    }
+    changed_indices = [index for index, _, _ in code_changes]
+    if any(index not in allowed_code_patches for index in changed_indices):
+        raise ValueError("Published notebook contains an unreviewed executable-cell change.")
+    for index, before, after in code_changes:
+        old, new = allowed_code_patches[index]
+        if old not in before or before.replace(old, new, 1) != after:
+            raise ValueError(f"Published code cell {index} differs from its reviewed patch.")
+    return {"markdown_cell_indices": markdown_changes, "code_cell_indices": changed_indices}
 
 
 def write_csv(path, rows, columns):
@@ -739,10 +766,14 @@ def main():
     ]
     if code_sources[0] != code_sources[1]:
         raise ValueError("Submitted and Kaggle-pulled executable cells do not match.")
-    assert_documentation_only(args.execution_source, args.published_notebook)
+    publication_changes = assert_reviewed_publication_changes(
+        args.execution_source, args.published_notebook
+    )
+    execution_sources = notebook_cells(args.execution_source)[1]
+    execution_plot_patch_present = RUN5_PLOT_AFTER in execution_sources[6]
     functional_hashes = [functional_ast_hash(path) for path in notebooks]
-    if len(set(functional_hashes)) != 1:
-        raise ValueError("Published notebook changes executable logic; public curation refused.")
+    if functional_hashes[0] != functional_hashes[1]:
+        raise ValueError("Execution and Kaggle-pulled source have different executable logic.")
 
     names = (
         "run5_train_holdout_model_metrics.csv",
@@ -849,7 +880,7 @@ def main():
         "source_notebooks": {
             "execution_source_file_sha256": sha256_file(args.execution_source),
             "kaggle_pulled_source_file_sha256": sha256_file(args.pulled_source),
-            "published_notebook_file_sha256": sha256_file(args.published_notebook),
+            "published_notebook_file_sha256": sha256_normalized_text_file(args.published_notebook),
             "curation_script_sha256": sha256_file(Path(__file__)),
             "execution_source_cell_sha256": source_hash(args.execution_source),
             "kaggle_pulled_source_cell_sha256": source_hash(args.pulled_source),
@@ -862,12 +893,26 @@ def main():
             "functional_ast_sha256_docstrings_removed": functional_hashes[0],
             "functional_ast_hash_method": "AST dumps of executable cells after replacing Jupyter magic lines with pass and removing docstrings; cells joined with newline.",
             "published_functional_ast_matches_execution": functional_hashes[0] == functional_hashes[2],
+            "published_functional_ast_sha256_docstrings_removed": functional_hashes[2],
             "published_notebook_contains_saved_outputs": False,
-            "published_changes_are_documentation_only": True,
+            "published_changes_are_documentation_only": all(
+                index == 3 for index in publication_changes["code_cell_indices"]
+            ),
+            "published_changes_are_within_reviewed_whitelist": True,
             "published_documentation_changes": {
-                "markdown_cell_indices": list(EXPECTED_MARKDOWN_CELL_SHA256),
-                "markdown_cell_sha256": EXPECTED_MARKDOWN_CELL_SHA256,
-                "code_cell_change": "Cell 3 module docstring narrowed to CPU-based classical baselines.",
+                "markdown_cell_indices": publication_changes["markdown_cell_indices"],
+                "markdown_cell_sha256": {
+                    str(index): EXPECTED_MARKDOWN_CELL_SHA256[index]
+                    for index in publication_changes["markdown_cell_indices"]
+                },
+                "code_cell_change": "Cell 3 module docstring narrowed to CPU-based classical baselines."
+                    if 3 in publication_changes["code_cell_indices"] else None,
+            },
+            "published_post_run_plot_patch": {
+                "cell_index_zero_based": 6,
+                "included": 6 in publication_changes["code_cell_indices"],
+                "change": "When included, derive learning-curve y-axis bounds from all plotted means and standard deviations; model fitting and metrics are unchanged.",
+                "recorded_execution_source_includes_patch": execution_plot_patch_present,
             },
         },
         "methodology_limitations": [

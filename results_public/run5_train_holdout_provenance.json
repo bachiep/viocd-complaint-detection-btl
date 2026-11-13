@@ -18,21 +18,21 @@
   "source_notebooks": {
     "execution_source_file_sha256": "3c22199ee4a363f4e13a026fe4c7c2afb8108b4555ac76837e6e3fb4e420ba36",
     "kaggle_pulled_source_file_sha256": "ebd87360f5e4929eb8f0636eb19b2062e5b8093acb962ee2e4e3f261467f3575",
-    "published_notebook_file_sha256": "9abb76e6251b9b78c7e86706847a0f0cf24b4417c79fe480cdd69593395b4853",
+    "published_notebook_file_sha256": "fa847596061db77444e61d87c8c21bf5fb27ab0585e1e5286bedd9d4d8f4fbc4",
     "curation_script_sha256": "0fcd695d9e97d6ba9877c0de87e59ed006226755b6aa5aaefeb9d7754a8a713a",
     "execution_source_cell_sha256": "b3c160d751bd56224e09dd4abf29a98eafea0de5d1694bf431f79e5b17dd0cbb",
     "kaggle_pulled_source_cell_sha256": "b3c160d751bd56224e09dd4abf29a98eafea0de5d1694bf431f79e5b17dd0cbb",
-    "published_source_cell_sha256": "b70f3ee849bdd0e0947971821523defc8845ae5c958c76ad0f364a9eedeaf6e1",
+    "published_source_cell_sha256": "4ca0a6f142605005ee991130e5d4ee16c3bd4ebcdfb418d30521267e43823858",
     "execution_code_cell_sha256": "ae0473e05ad1bb24269eb881f01f60c64e9c9c802d5b60ad38b22a0e6d02adb2",
-    "published_code_cell_sha256": "dad7e67fd04a9cf3d9100e7f84eb5510ab91d919ccea57ed8ce3fad4e41363c2",
+    "published_code_cell_sha256": "9b6fd310eb417732b89e02b58ffc4cd3196743f26d45da3bb899cdfea2b5f4a5",
     "source_cell_hash_method": "SHA-256 over canonical JSON of ordered cell-type/source entries, UTF-8 encoded.",
     "code_cell_hash_method": "SHA-256 over canonical JSON of ordered executable-cell type/source entries, UTF-8 encoded.",
     "submitted_and_pulled_code_cells_identical": true,
     "functional_ast_sha256_docstrings_removed": "7f7b55b4f2d99fb9ea8bff267f20b0415cfa6813b9ed439b108be5ffd98b13a3",
     "functional_ast_hash_method": "AST dumps of executable cells after replacing Jupyter magic lines with pass and removing docstrings; cells joined with newline.",
-    "published_functional_ast_matches_execution": true,
+    "published_functional_ast_matches_execution": false,
     "published_notebook_contains_saved_outputs": false,
-    "published_changes_are_documentation_only": true,
+    "published_changes_are_documentation_only": false,
     "published_documentation_changes": {
       "markdown_cell_indices": [
         0,
@@ -45,7 +45,17 @@
         "11": "3639515c9be901adf7898f6188fb7a65b6d7518d2c9f8554909b39a7cba39af6"
       },
       "code_cell_change": "Cell 3 module docstring narrowed to CPU-based classical baselines."
-    }
+    },
+    "published_functional_ast_sha256_docstrings_removed": "c9572cf564ed24f64f99d8dd0c2b971c2aab4d0d8792f18717992d1c2f43b68c",
+    "published_changes_are_within_reviewed_whitelist": true,
+    "published_post_run_plot_patch": {
+      "cell_index_zero_based": 6,
+      "change": "Derive learning-curve y-axis bounds from all plotted means and standard deviations so no point/error bar is clipped.",
+      "affects_training_or_metrics": false,
+      "included_in_recorded_kaggle_execution_source": false,
+      "output_plot_regenerated": false
+    },
+    "published_notebook_file_sha256_method": "SHA-256 of the published notebook file after normalizing CRLF and CR line endings to LF, matching Git-published bytes."
   },
   "methodology_limitations": [
     "All Run5 partitions were drawn from the cleaned original-training pool; every row in that pool was previously used in Run4 supervised training.",
@@ -86,5 +96,13 @@
     "results_robustness/accent_augmentation.json": "b660bd9b2f0b32e4aedb8ec04f99fda7cc6f3c840768c0b87d540d7c3a36d1e8",
     "results_robustness/accent_augmentation_uncertainty.json": "659069448f6cec79a96100e395e7c07d19d3075ca2eb39017330917edc700d95",
     "results/split_manifest_private.json": "dd9b12522abf52a5493b88c0cf5bfde758caf3eaba26cbf073c9c56a48a4a2e1"
+  },
+  "post_run_provenance_amendment": {
+    "date": "2026-11-13",
+    "reason": "Record the reviewed public-only learning-curve plotting patch without re-curating corpus-derived aggregates.",
+    "review_method": "Static source and diff review against the exact allowlisted Run5 docstring and plot-cell patches; no notebook execution and no private Kaggle output access.",
+    "review_reference_current_helper_sha256": "0992267ad9164f4c59580be7c31b35088eecc7f5ac7bad1b02767243675d028b",
+    "current_helper_executed": false,
+    "aggregate_recuration_performed": false
   }
 }

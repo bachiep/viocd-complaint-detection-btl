@@ -4,8 +4,6 @@
   "2": "main",
   "3": "Kết quả tổng hợp công khai",
   "4": "Q: project scope, dataset, model training, evaluation, artifacts and rubric status",
-  "5": "source_hash",
-  "6": "validate_run_metadata",
   "7": "StripDocstrings",
   "8": "functional_ast_hash",
   "9": "confusion_rows"
