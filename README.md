@@ -32,6 +32,7 @@ Kho mã không phân phối lại corpus hoặc trọng số đã huấn luyện
 ### Phiên bản dữ liệu và mô hình
 
 - Dữ liệu: [UIT-ViOCD trên Hugging Face](https://huggingface.co/datasets/tarudesu/ViOCD), commit `25e1851683ebc407d28e5a2d514b7ae0eadd4e4b`.
+- [Bài báo gốc](https://doi.org/10.3233/FAIA210058), [trang UIT NLP](https://sites.google.com/uit.edu.vn/uit-nlp/datasets) và phần mô tả dataset trên Hugging Face ghi 5.485 review; tại lần kiểm tra 13/11/2026, HF Viewer và tổng các split thô của revision ghim đều cho 5.484 (4.387 train + 548 validation + 549 test; xem results_public/data_summary.json). Nhóm báo cáo số dòng thực có, không thêm mẫu; chênh lệch một dòng chưa được giải thích.
 - PhoBERT: `vinai/phobert-base`, revision `01daacda68afe13d83023d16ec647239e344a1e6`.
 - Hạt giống: 42, 43, 44.
 - Chia train/validation/test, quy tắc lọc trùng và chỉ số đánh giá được cố định trong notebook.
