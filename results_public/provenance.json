@@ -19,5 +19,16 @@
     "max_length_tokens": 128,
     "score_keys_use_complaint_labels": true,
     "seed_42_checkpoint_cached_with_explicit_release": true
-  }
+  },
+  "source_cell_sha256_scope": "Kaggle kernel version 10 executed source notebook.",
+  "published_notebook_source_cell_sha256": "dd87097b98c9632360bfd591ab3d86b4a51ab37d835385034d0f552780dd0865",
+  "published_notebook_code_source_sha256": "e0c92e8694d5bdd63b367f635a6b49055536034294827240ced9cbbf535c3a4b",
+  "published_functional_ast_sha256_docstrings_removed": "72357b00cfdedca81edcfe6894fcb27573d37d10c678b39300bb76892f023e94",
+  "published_notebook_post_run_correction": {
+    "cell_index_zero_based": 3,
+    "cell_id": "pipeline code",
+    "change": "Corrected the module docstring to distinguish CPU baselines from CUDA PhoBERT.",
+    "executable_logic_changed": false
+  },
+  "functional_ast_hash_method": "AST dump of ordered executable cells after replacing notebook magic lines with pass and stripping module/function/class docstrings; implemented by tools/curate_run5_public_results.py."
 }

@@ -13,6 +13,7 @@ Tiêu chí nghiệm thu của nghiên cứu là: (1) pipeline chạy từ dữ l
 ## Nội dung kho mã
 
 - `ViOCD_Kaggle_GPU_3seed.ipynb`: notebook tái lập pipeline Run4 trên các split chính thức, từ EDA/tiền xử lý tới demo: ba baseline TF-IDF, PhoBERT ba seed trên GPU, khảo sát quy mô train, robustness và tăng cường bỏ dấu.
+- Bản công khai Run4 sửa docstring trong ô mã 3 sau lần chạy Kaggle v10 để mô tả đúng baseline CPU và PhoBERT CUDA. Đây là hiệu chỉnh tài liệu trong docstring, không đổi logic thực thi; provenance tách hash nguồn đã chạy khỏi hash bản công khai và ghi kiểm tra AST sau khi bỏ docstring.
 - `ViOCD_Kaggle_Run5_TrainDerivedHoldout_GPU_3seed.ipynb`: notebook Run5 dùng một holdout nội bộ bổ sung được tách từ pool train gốc. Đây là phân tích hậu nghiệm, không phải xác nhận độc lập; các giới hạn được nêu ngay trong notebook và provenance.
 - `tools/curate_run5_public_results.py`: tạo các bảng tổng hợp Run5 từ output riêng tư bằng danh sách trường cho phép; không xuất văn bản, mã dòng hoặc dự đoán từng mẫu.
 - Notebook không lưu output cell. Mỗi lần chạy tạo kết quả trong `results/`, `results_phobert/` và `results_robustness/`. `segmented_overlap_audit.json` kiểm tra trùng lặp sau Underthesea giữa các split; `sequence_length_audit.csv` thống kê độ dài PhoBERT và phần mẫu bị cắt ở 128 token; `per_domain_metrics.csv` lưu metric/confusion theo bốn miền.
@@ -49,7 +50,7 @@ Run5 lấy pool từ 4.157 mẫu train gốc sau làm sạch, rồi chia 3.117/4
 
 Các metric Run5, bootstrap, confusion counts, theo miền, learning curve, độ dài token, robustness và provenance tổng hợp nằm trong `results_public/run5_train_holdout_*`. Bảng nguồn cấp từng mẫu vẫn được giữ riêng tư.
 
-Kiểm tra bỏ dấu dùng phép biến đổi mô phỏng trên cùng tập test, không phải đánh giá trên dữ liệu thiếu dấu tự nhiên. Phân tích cặp chẩn đoán gồm 18 cặp do nhóm tự soạn, bao phủ phủ định, khen kèm bất mãn và sai lệch kỳ vọng. Bộ này chưa có cặp riêng cho ngôn ngữ tiêu cực/xúc phạm nhưng không phải lời phàn nàn mang tính xây dựng, nên chỉ mang tính minh họa, chưa bao quát đầy đủ ranh giới nhãn. Các bảng và biểu đồ tổng hợp nằm trong `results_public/`; chúng không chứa dữ liệu từng review. Bản Word/PDF của nhóm trình bày đầy đủ diễn giải và giới hạn.
+Kiểm tra bỏ dấu dùng phép biến đổi mô phỏng trên cùng tập test, không phải đánh giá trên dữ liệu thiếu dấu tự nhiên. Phân tích cặp chẩn đoán gồm 18 cặp do nhóm tự soạn, bao phủ phủ định, khen kèm bất mãn và sai lệch kỳ vọng. Bộ này chưa có cặp riêng cho ngôn ngữ tiêu cực/xúc phạm nhưng không phải lời phàn nàn mang tính xây dựng, nên chỉ mang tính minh họa, chưa bao quát đầy đủ ranh giới nhãn. Các bảng và biểu đồ tổng hợp nằm trong `results_public/`; chúng không chứa dữ liệu từng review. Báo cáo Word thuộc hồ sơ nội bộ, không phát hành trong repo này.
 
 
 ### Tăng cường bỏ dấu và tổng quát hóa theo miền
@@ -78,6 +79,14 @@ Bài báo gốc: Nguyen và cộng sự (2021), *Vietnamese Complaint Detection 
 
 Run4 version 10 đã hoàn tất trên Tesla T4 với ba seed, 546 test rows mỗi seed, dự đoán checkpoint restore trùng hoàn toàn và 77 output files. Demo kiểm tra đầu vào rỗng/không phải chuỗi, hai ví dụ tổng hợp, và review dài 702 token được báo cắt ở giới hạn 128. Run5 v5 đã hoàn tất trên Tesla T4 với ba seed, 624 mẫu, checkpoint restore trùng hoàn toàn và 73 output files; [provenance công khai](results_public/run5_train_holdout_provenance.json) ghi hash nguồn Kaggle, notebook công khai đã làm rõ tài liệu, checksum dữ liệu và các giới hạn phương pháp. Kernel Run4 [riêng tư](https://www.kaggle.com/code/hiptetsuya/viocd-phobert-gpu-3seed-run4) và Run5 [riêng tư](https://www.kaggle.com/code/hiptetsuya/viocd-phobert-fresh-holdout-run5); người chấm cần được chủ tài khoản cấp quyền xem/chạy để kiểm tra log trực tiếp. Mã nguồn và kết quả tổng hợp có thể xem trong repo mà không cần quyền kernel. Repo không chứa corpus, văn bản review, ID dòng, dự đoán từng mẫu, checkpoint, trọng số hay log riêng tư.
 
+## Hướng cải tiến đề xuất
+
+Các hướng dưới đây là đề xuất cho nghiên cứu tiếp theo, chưa nằm trong kết quả đã nghiệm thu:
+
+- Sau khi có quyền sử dụng, thu thập review mới từ thời điểm/nền tảng/nhãn hàng khác; khóa một tập test độc lập trước khi chọn mô hình hoặc ngưỡng và gán nhãn bằng ít nhất hai người độc lập có bước đối chiếu. Không đưa nhãn do mô hình tự sinh vào tập test chuẩn.
+- Bổ sung review mới được phép sử dụng cho miền mobile và các trường hợp ranh giới nhãn; test Run4 hiện chỉ có 46 review mobile. Loại trùng với ViOCD và các pool đã dùng; dữ liệu bổ sung chỉ vào train/validation hoặc một test độc lập mới được khóa trước khi tinh chỉnh. Báo cáo metric theo miền kèm khoảng bất định, không suy rộng từ mẫu nhỏ.
+- Hiệu chỉnh điểm xác suất và đánh giá cách xử lý review dài hơn giới hạn 128 token. Chọn phương pháp bằng validation hoặc tập phát triển riêng rồi chỉ đánh giá một lần trên test độc lập mới.
+
 ## Báo cáo
 
-Bản báo cáo Word và PDF có trong gói nộp của nhóm. Trước khi nộp, điền thông tin thành viên trên bìa và cấp quyền Kaggle cho giảng viên.
+Báo cáo Word/PDF là hồ sơ nội bộ, không nằm trong repo công khai. Sau khi hoàn tất Word, nhóm cần xuất và kiểm tra PDF trước khi nộp, điền thông tin thành viên trên bìa và cấp quyền Kaggle cho giảng viên.
