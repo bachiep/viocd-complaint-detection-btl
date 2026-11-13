@@ -23,6 +23,8 @@ results_robustness/
 __pycache__/
 .ipynb_checkpoints/
 .cache/
+# Exploratory Run5 notebook is kept local until its evidence is formally reviewed.
+/ViOCD_Kaggle_Fresh_Holdout_GPU_3seed.ipynb
 # Curated aggregate-only results reviewed for public release
 !/results_public/
 results_public/*
