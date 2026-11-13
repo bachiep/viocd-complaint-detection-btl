@@ -1,0 +1,98 @@
+{
+  "dataset": "UIT-ViOCD",
+  "dataset_commit": "25e1851683ebc407d28e5a2d514b7ae0eadd4e4b",
+  "splits": {
+    "test": {
+      "raw": 549,
+      "missing": 0,
+      "blank": 0,
+      "conflict_rows": 0,
+      "duplicate_rows": 3,
+      "overlap_rows": 0,
+      "retained": 546,
+      "labels": {
+        "0": 268,
+        "1": 278
+      },
+      "domains": {
+        "app": 194,
+        "fashion": 157,
+        "cosmetic": 149,
+        "mobile": 46
+      },
+      "whitespace_units": 15992,
+      "median_length": 19.0,
+      "p95_length": 76.0
+    },
+    "val": {
+      "raw": 548,
+      "missing": 0,
+      "blank": 0,
+      "conflict_rows": 0,
+      "duplicate_rows": 0,
+      "overlap_rows": 4,
+      "retained": 544,
+      "labels": {
+        "0": 262,
+        "1": 282
+      },
+      "domains": {
+        "app": 203,
+        "fashion": 154,
+        "cosmetic": 135,
+        "mobile": 52
+      },
+      "whitespace_units": 16087,
+      "median_length": 20.0,
+      "p95_length": 75.85000000000002
+    },
+    "train": {
+      "raw": 4387,
+      "missing": 0,
+      "blank": 0,
+      "conflict_rows": 2,
+      "duplicate_rows": 153,
+      "overlap_rows": 75,
+      "retained": 4157,
+      "labels": {
+        "0": 1928,
+        "1": 2229
+      },
+      "domains": {
+        "app": 1605,
+        "fashion": 1183,
+        "cosmetic": 1016,
+        "mobile": 353
+      },
+      "whitespace_units": 123835,
+      "median_length": 20.0,
+      "p95_length": 76.0
+    }
+  },
+  "segmented_overlap_audit": [
+    {
+      "split": "test",
+      "rows": 546,
+      "within_split_duplicate_segmented_rows": 0,
+      "cross_split_segmented_overlap_rows": 0,
+      "within_split_segment_label_conflict_rows": 0,
+      "cross_split_segment_label_conflict_rows": 0
+    },
+    {
+      "split": "val",
+      "rows": 544,
+      "within_split_duplicate_segmented_rows": 0,
+      "cross_split_segmented_overlap_rows": 0,
+      "within_split_segment_label_conflict_rows": 0,
+      "cross_split_segment_label_conflict_rows": 0
+    },
+    {
+      "split": "train",
+      "rows": 4157,
+      "within_split_duplicate_segmented_rows": 0,
+      "cross_split_segmented_overlap_rows": 0,
+      "within_split_segment_label_conflict_rows": 0,
+      "cross_split_segment_label_conflict_rows": 0
+    }
+  ]
+}

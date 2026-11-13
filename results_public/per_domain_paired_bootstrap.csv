@@ -1,0 +1,5 @@
+domain,n,class_0_n,class_1_n,baseline_c_macro_f1,phobert_mean_seed_macro_f1,observed_difference,ci95_lower,ci95_upper,bootstrap_samples,bootstrap_seed,interpretation
+app,194,52,142,0.865646072535083,0.8918009743614448,0.02615490182636182,-0.012687361256003485,0.06893949776967305,2000,20261112,descriptive paired interval conditional on the previously inspected fixed test set; no multiplicity correction
+cosmetic,149,95,54,0.921038685744568,0.9202563097177477,-0.0007823760268202973,-0.04458110579518545,0.04349198087045987,2000,20261113,descriptive paired interval conditional on the previously inspected fixed test set; no multiplicity correction
+fashion,157,88,69,0.9095026350461133,0.9073865688736961,-0.002116066172417219,-0.05338969027485273,0.05058841483796994,2000,20261114,descriptive paired interval conditional on the previously inspected fixed test set; no multiplicity correction
+mobile,46,33,13,0.9725373134328358,0.9551037354022429,-0.017433578030592867,-0.10414890593918724,0.06948263759857953,2000,20261115,descriptive paired interval conditional on the previously inspected fixed test set; no multiplicity correction

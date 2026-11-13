@@ -1,0 +1,34 @@
+{
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "n_runs": 3,
+  "test_unaccented_rows": 546,
+  "accent_overlap_rows": 4,
+  "sensitivity_rows": 542,
+  "metrics": {
+    "clean_test_macro_f1": {
+      "mean": 0.9223447699569141,
+      "sd_sample": 0.0028592186074034237
+    },
+    "unaccented_test_macro_f1": {
+      "mean": 0.6716673985158699,
+      "sd_sample": 0.007867436512617723
+    },
+    "unaccented_test_accuracy": {
+      "mean": 0.6764346764346764,
+      "sd_sample": 0.0027976652594357897
+    },
+    "sensitivity_macro_f1": {
+      "mean": 0.668979807368001,
+      "sd_sample": 0.00824233484366491
+    },
+    "challenge_pairs_correct": {
+      "mean": 10.333333333333334,
+      "sd_sample": 2.081665999466133
+    }
+  },
+  "interpretation": "post-hoc exploratory evaluation on the fixed test split and synthetic diagnostic pairs; not independent out-of-domain confirmation"
+}

@@ -1,0 +1,4 @@
+split,n_examples,includes_special_tokens,max_input_tokens,examples_truncated,truncated_percent,median_tokens,p95_tokens,max_tokens_before_truncation
+train,4157,True,128,15,0.36083714216983404,22.0,78.0,245
+val,544,True,128,0,0.0,21.0,78.0,90
+test,546,True,128,2,0.3663003663003663,22.0,76.0,269

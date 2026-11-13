@@ -23,3 +23,26 @@ results_robustness/
 __pycache__/
 .ipynb_checkpoints/
 .cache/
+# Curated aggregate-only results reviewed for public release
+!/results_public/
+results_public/*
+!results_public/README.md
+!results_public/accent_augmentation.json
+!results_public/accent_augmentation_uncertainty_summary.json
+!results_public/baseline_metrics.csv
+!results_public/checkpoint_restore_verification.json
+!results_public/data_summary.json
+!results_public/environment.json
+!results_public/error_counts_by_domain.csv
+!results_public/evaluation.png
+!results_public/learning_curve.png
+!results_public/learning_curve_summary.csv
+!results_public/model_comparison.csv
+!results_public/paired_bootstrap.json
+!results_public/paired_error_transition_summary.csv
+!results_public/per_domain_metrics.csv
+!results_public/per_domain_paired_bootstrap.csv
+!results_public/phobert_seed_metrics.csv
+!results_public/provenance.json
+!results_public/robustness_summary.json
+!results_public/sequence_length_audit.csv

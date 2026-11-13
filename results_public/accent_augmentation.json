@@ -1,0 +1,24 @@
+[
+  {
+    "model": "F0_clean_duplicate",
+    "training_rows": 8314,
+    "val_clean": 0.9170099160945843,
+    "val_unaccented": 0.8047009415430468,
+    "test_clean": 0.9192307692307693,
+    "test_unaccented": 0.790576550387597,
+    "test_unaccented_sensitivity": 0.7889321582291453,
+    "sensitivity_test_n": 542,
+    "accent_overlap_test_n": 4
+  },
+  {
+    "model": "F1_accent_augmentation",
+    "training_rows": 8314,
+    "val_clean": 0.9133214679210102,
+    "val_unaccented": 0.8967013888888888,
+    "test_clean": 0.9119449521556822,
+    "test_unaccented": 0.899210262227846,
+    "test_unaccented_sensitivity": 0.8984462030599001,
+    "sensitivity_test_n": 542,
+    "accent_overlap_test_n": 4
+  }
+]

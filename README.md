@@ -2,13 +2,20 @@
 
 Mã nguồn tái lập cho bài tập lớn học phần Xử lý ngôn ngữ tự nhiên: xây dựng và đánh giá hệ thống phân loại đánh giá sản phẩm tiếng Việt thành **có lời phàn nàn (1)** hoặc **không có lời phàn nàn (0)** theo định nghĩa của corpus UIT-ViOCD.
 
+## Đối tượng sử dụng và tiêu chí nghiệm thu
+
+Đối tượng sử dụng dự kiến là nhân sự chăm sóc khách hàng hoặc kiểm soát chất lượng tại cửa hàng/sàn thương mại điện tử, dùng kết quả phân loại để ưu tiên review cần con người xem xét. Đây là giả định về bối cảnh sử dụng; nhóm chưa khảo sát người dùng và kết quả chưa chứng minh phù hợp triển khai thực tế.
+
+Tiêu chí nghiệm thu của nghiên cứu là: (1) pipeline chạy từ dữ liệu và mô hình đã ghim phiên bản; (2) baseline và PhoBERT được so sánh trên cùng test sau khi lựa chọn cấu hình/epoch bằng validation; (3) Macro-F1 là chỉ số chính, kèm precision, recall và confusion matrix; (4) chỉ kết luận PhoBERT vượt baseline khi cận dưới CI bootstrap ghép cặp 95% lớn hơn 0. Quy tắc diễn giải này được ghi sau các vòng đã xem test, nên không phải tiền đăng ký. Nhóm chưa thống nhất ngưỡng vận hành định lượng với người dùng dự kiến hoặc giảng viên. Kết quả hiện tại mang tính hậu nghiệm; nhóm không tuyên bố hệ thống sẵn sàng triển khai.
+
 ## Nội dung kho mã
 
 - `ViOCD_Kaggle_GPU_3seed.ipynb`: notebook tái lập pipeline từ dữ liệu tới demo: EDA/tiền xử lý, ba baseline TF-IDF, PhoBERT ba seed trên GPU, đối chứng đặc trưng, khảo sát quy mô train, robustness, tăng cường bỏ dấu và đánh giá.
 - Notebook không lưu output cell. Mỗi lần chạy tạo kết quả trong `results/`, `results_phobert/` và `results_robustness/`. `segmented_overlap_audit.json` kiểm tra trùng lặp sau Underthesea giữa các split; `sequence_length_audit.csv` thống kê độ dài PhoBERT và phần mẫu bị cắt ở 128 token; `per_domain_metrics.csv` lưu metric/confusion theo bốn miền.
-- Phân tích paired lưu `paired_error_transitions.csv` (1.638 dòng, không chứa review text), bảng tổng hợp theo seed/miền/nhãn, bootstrap ghép cặp theo miền và tối đa 10 trích đoạn lỗi PhoBERT seed 42. `paired_error_case_studies_seed42.csv` có sáu ghi chú định tính hậu nghiệm; đó là giả thuyết của một lượt đọc, không phải nguyên nhân đã được chứng minh hay đánh giá độc lập. Các output không được commit vào repo công khai.
+- `results_public/` chứa các bảng và biểu đồ tổng hợp đã kiểm tra từ Run4 version 9. Các tệp này không có nội dung review, ID dòng test, dự đoán từng mẫu, checkpoint, trọng số hay log.
+- Output đầy đủ của notebook có thêm dự đoán theo từng dòng và các trích đoạn lỗi để phân tích nội bộ; các tệp đó vẫn nằm trong output Kaggle riêng tư. Sáu ghi chú định tính là giả thuyết hậu nghiệm một lượt đọc, chưa được xác nhận độc lập.
 
-Kho mã không phân phối lại corpus, các dự đoán mẫu, checkpoint hay trọng số đã huấn luyện. Notebook tải corpus theo commit cố định từ nguồn, còn PhoBERT được tải theo revision cố định.
+Kho mã không phân phối lại corpus hoặc trọng số đã huấn luyện. Notebook tải corpus theo commit cố định từ nguồn, còn PhoBERT được tải theo revision cố định.
 
 ## Tái lập trên Kaggle
 
@@ -29,7 +36,7 @@ Kho mã không phân phối lại corpus, các dự đoán mẫu, checkpoint hay
 
 Trên test 546 mẫu, baseline Linear SVM + Underthesea đạt Macro-F1 **91,74%**. PhoBERT đạt trung bình **92,23% ± 0,29 điểm phần trăm SD mẫu** qua ba lượt huấn luyện. Khoảng bootstrap ghép cặp cho chênh lệch PhoBERT so với baseline chứa 0; thí nghiệm chưa xác nhận PhoBERT vượt trội ổn định.
 
-Kiểm tra bỏ dấu dùng phép biến đổi mô phỏng trên cùng tập test, không phải đánh giá trên dữ liệu thiếu dấu tự nhiên. Phân tích cặp chẩn đoán gồm 18 cặp do nhóm tự soạn và chỉ mang tính thăm dò. Xem báo cáo Word/PDF của nhóm để biết đầy đủ số liệu, khoảng tin cậy, giới hạn và cách diễn giải.
+Kiểm tra bỏ dấu dùng phép biến đổi mô phỏng trên cùng tập test, không phải đánh giá trên dữ liệu thiếu dấu tự nhiên. Phân tích cặp chẩn đoán gồm 18 cặp do nhóm tự soạn và chỉ mang tính thăm dò. Các bảng và biểu đồ tổng hợp nằm trong `results_public/`; chúng không chứa dữ liệu từng review. Bản Word/PDF của nhóm trình bày đầy đủ diễn giải và giới hạn.
 
 
 ### Tăng cường bỏ dấu và tổng quát hóa theo miền
@@ -56,7 +63,7 @@ Bài báo gốc: Nguyen và cộng sự (2021), *Vietnamese Complaint Detection 
 
 ## Bằng chứng chạy thực tế
 
-Các lần chạy Kaggle Run1–Run4 đã hoàn tất trên GPU Tesla T4. Run4 version 8 là lần chạy hiện hành đã xác minh: `COMPLETE`, ba seed PhoBERT, checkpoint restore trùng dự đoán, 77 output files. Version 8 bổ sung audit chồng lấn sau tách từ, thống kê độ dài/cắt token, chuyển tiếp lỗi ghép cặp, CI theo miền và sáu ca định tính có giới hạn diễn giải. Version 7 dừng ở cell phân tích do lỗi biến chưa khai báo; không dùng output đó. Version 5 cũng thất bại trước huấn luyện. Các lượt Run3/Run4 v1–v3 được giữ làm lịch sử; không dùng CI tăng cường bỏ dấu sai của chúng. Kernel Run4 [đặt riêng tư](https://www.kaggle.com/code/hiptetsuya/viocd-phobert-gpu-3seed-run4); người chấm cần được chủ tài khoản cấp quyền xem/chạy để kiểm tra log/output. Repo GitHub công khai mã notebook, không chứa corpus, trích đoạn lỗi, checkpoint hay output riêng tư.
+Mỗi kernel Kaggle Run1–Run4 đã có ít nhất một lượt hoàn tất trên GPU Tesla T4. Run4 version 9 là lần chạy hiện hành đã xác minh: `COMPLETE`, ba seed PhoBERT, checkpoint restore trùng dự đoán và 77 output files. Version 9 dùng lại đúng chuỗi đã tokenize trong audit và baseline, bỏ hàm demo baseline không còn dùng; metric chính giữ nguyên so với version 8. Version 9 bổ sung audit chồng lấn sau tách từ, thống kê độ dài/cắt token, chuyển tiếp lỗi ghép cặp, CI theo miền và sáu ca định tính có giới hạn diễn giải. Version 8 là lần chạy xác minh trước đó; version 7 dừng ở cell phân tích do lỗi biến chưa khai báo, không dùng output đó. Version 5 cũng thất bại trước huấn luyện. Các lượt Run3/Run4 v1–v3 được giữ làm lịch sử; không dùng CI tăng cường bỏ dấu sai của chúng. Kernel Run4 [đặt riêng tư](https://www.kaggle.com/code/hiptetsuya/viocd-phobert-gpu-3seed-run4); người chấm cần được chủ tài khoản cấp quyền xem/chạy để kiểm tra log/output trực tiếp. `results_public/` cung cấp các metric tổng hợp để xem mà không cần quyền kernel. Repo không chứa corpus, trích đoạn review, dự đoán từng dòng, checkpoint, trọng số hay log riêng tư.
 
 ## Báo cáo
 

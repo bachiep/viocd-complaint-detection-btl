@@ -1,0 +1,20 @@
+{
+  "baseline_configuration": "C_SVM_segmented",
+  "test_rows": 546,
+  "baseline_macro_f1": 0.9174359094987348,
+  "phobert_mean_seed_macro_f1": 0.9223447699569141,
+  "observed_mean_difference": 0.004908860458179287,
+  "paired_bootstrap_ci95": [
+    -0.017219082158448508,
+    0.026253048568706312
+  ],
+  "bootstrap_samples": 2000,
+  "bootstrap_seed": 20261112,
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "same_test_row_ids_for_all_models": true,
+  "interpretation": "conditional paired interval for the mean of three trained seeds on the previously inspected fixed test set"
+}
