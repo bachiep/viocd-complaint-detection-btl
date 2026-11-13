@@ -4,8 +4,9 @@ Mã nguồn tái lập cho bài tập lớn học phần Xử lý ngôn ngữ t�
 
 ## Nội dung kho mã
 
-- `ViOCD_Kaggle_GPU_3seed.ipynb`: notebook chạy từ đầu đến cuối, gồm tiền xử lý, baseline TF-IDF, Linear SVM với Underthesea, tinh chỉnh PhoBERT ba seed trên GPU Kaggle, so sánh ghép cặp, khảo sát quy mô train (25/50/75/100%), phân tích độ bền, thử nghiệm tăng cường dữ liệu và demo dự đoán một review bằng cấu hình đã chọn.
-- Notebook không lưu output cell. Mỗi lần chạy tạo kết quả mới trong thư mục `results/`, `results_phobert/` và `results_robustness/`. `results/error_examples.csv` chứa 5 false positive và 5 false negative kèm trích đoạn ngắn; chọn theo thứ tự dòng để minh họa nên không đại diện, nhãn vẫn là nhãn corpus và chưa được gán lại độc lập. Tệp này không được commit vào repo. Khảo sát quy mô lưu `learning_curve_runs.csv`, `learning_curve_summary.csv`, manifest các dòng train và biểu đồ; chỉ dùng validation, test không tham gia.
+- `ViOCD_Kaggle_GPU_3seed.ipynb`: notebook tái lập pipeline từ dữ liệu tới demo: EDA/tiền xử lý, ba baseline TF-IDF, PhoBERT ba seed trên GPU, đối chứng đặc trưng, khảo sát quy mô train, robustness, tăng cường bỏ dấu và đánh giá.
+- Notebook không lưu output cell. Mỗi lần chạy tạo kết quả trong `results/`, `results_phobert/` và `results_robustness/`. `segmented_overlap_audit.json` kiểm tra trùng lặp sau Underthesea giữa các split; `sequence_length_audit.csv` thống kê độ dài PhoBERT và phần mẫu bị cắt ở 128 token; `per_domain_metrics.csv` lưu metric/confusion theo bốn miền.
+- Phân tích paired lưu `paired_error_transitions.csv` (1.638 dòng, không chứa review text), bảng tổng hợp theo seed/miền/nhãn, bootstrap ghép cặp theo miền và tối đa 10 trích đoạn lỗi PhoBERT seed 42. `paired_error_case_studies_seed42.csv` có sáu ghi chú định tính hậu nghiệm; đó là giả thuyết của một lượt đọc, không phải nguyên nhân đã được chứng minh hay đánh giá độc lập. Các output không được commit vào repo công khai.
 
 Kho mã không phân phối lại corpus, các dự đoán mẫu, checkpoint hay trọng số đã huấn luyện. Notebook tải corpus theo commit cố định từ nguồn, còn PhoBERT được tải theo revision cố định.
 
@@ -51,11 +52,11 @@ F0 lặp lại dữ liệu có dấu; F1 ghép dữ liệu gốc với bản b�
 Trên validation cố định, cấu hình C đạt Macro-F1 **88,93% ± 1,71 điểm phần trăm SD mẫu** ở 25% train (1.039 mẫu), **90,86% ± 0,99 điểm** ở 50% (2.078), **91,45% ± 0,58 điểm** ở 75% (3.117), và **92,07%** ở 100% (4.157; một lượt, không có SD). Các mức dưới 100% dùng năm lần lấy mẫu phân tầng theo nhãn với seed 42–46. Đây là biến thiên giữa tập con lấy mẫu, không phải biến thiên khởi tạo mô hình.
 ## Nguồn dữ liệu và giới hạn chia sẻ
 
-Bài báo gốc: Nguyen và cộng sự (2021), *Vietnamese Complaint Detection on E-Commerce Websites*, DOI [10.3233/FAIA210058](https://doi.org/10.3233/FAIA210058). Thẻ dữ liệu Hugging Face nêu mục đích nghiên cứu nhưng không khai báo một giấy phép chuẩn riêng. Nhóm dùng corpus trong phạm vi học thuật, dẫn nguồn và không phát hành lại dữ liệu. Việc sử dụng dữ liệu hoặc trọng số mô hình phải tuân theo điều kiện của chủ sở hữu tương ứng.
+Bài báo gốc: Nguyen và cộng sự (2021), *Vietnamese Complaint Detection on E-Commerce Websites*, DOI [10.3233/FAIA210058](https://doi.org/10.3233/FAIA210058). Dataset card trên Hugging Face ghi dữ liệu chỉ dùng cho nghiên cứu và không khai báo giấy phép chuẩn riêng. Nhóm dùng corpus trong phạm vi học thuật của BTL, dẫn nguồn và không phát hành lại dữ liệu. Việc có thể tải dữ liệu không được xem là giấy phép phân phối lại; cần hỏi chủ sở hữu nếu dùng ngoài phạm vi nghiên cứu hoặc muốn phát hành dữ liệu.
 
 ## Bằng chứng chạy thực tế
 
-Các lần chạy Kaggle Run1–Run4 đã hoàn tất trên GPU Tesla T4. Run4 phiên bản 4 sửa helper CI tăng cường bỏ dấu; chỉ output v4 là nguồn có thẩm quyền cho các CI này. Run3 và Run4 phiên bản 1–3 được lưu làm lịch sử, không dùng CI tăng cường bỏ dấu của chúng. Run4 cũng có khảo sát quy mô train và mười trích đoạn lỗi sinh trong môi trường chạy. Kernel Run4 [đặt riêng tư](https://www.kaggle.com/code/hiptetsuya/viocd-phobert-gpu-3seed-run4); người chấm cần được chủ tài khoản cấp quyền xem/chạy để kiểm tra log và output. Repo GitHub công khai mã nguồn notebook, không phân phối lại corpus, trích đoạn lỗi, checkpoint hay output riêng tư.
+Các lần chạy Kaggle Run1–Run4 đã hoàn tất trên GPU Tesla T4. Run4 version 8 là lần chạy hiện hành đã xác minh: `COMPLETE`, ba seed PhoBERT, checkpoint restore trùng dự đoán, 77 output files. Version 8 bổ sung audit chồng lấn sau tách từ, thống kê độ dài/cắt token, chuyển tiếp lỗi ghép cặp, CI theo miền và sáu ca định tính có giới hạn diễn giải. Version 7 dừng ở cell phân tích do lỗi biến chưa khai báo; không dùng output đó. Version 5 cũng thất bại trước huấn luyện. Các lượt Run3/Run4 v1–v3 được giữ làm lịch sử; không dùng CI tăng cường bỏ dấu sai của chúng. Kernel Run4 [đặt riêng tư](https://www.kaggle.com/code/hiptetsuya/viocd-phobert-gpu-3seed-run4); người chấm cần được chủ tài khoản cấp quyền xem/chạy để kiểm tra log/output. Repo GitHub công khai mã notebook, không chứa corpus, trích đoạn lỗi, checkpoint hay output riêng tư.
 
 ## Báo cáo
 
