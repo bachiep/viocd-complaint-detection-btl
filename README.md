@@ -2,6 +2,8 @@
 
 Mã nguồn tái lập cho bài tập lớn học phần Xử lý ngôn ngữ tự nhiên: xây dựng và đánh giá hệ thống phân loại đánh giá sản phẩm tiếng Việt thành **có lời phàn nàn (1)** hoặc **không có lời phàn nàn (0)** theo định nghĩa của corpus UIT-ViOCD.
 
+Theo hướng dẫn gốc, nhãn 1 phản ánh sự bất mãn khi thực tế không đạt kỳ vọng; lời khen có thể xuất hiện cùng phàn nàn, và góp ý tích cực vẫn có thể là phàn nàn nếu nêu mong muốn chưa được đáp ứng. Lời lẽ tiêu cực hoặc xúc phạm đơn thuần không tự động mang nhãn phàn nàn. Vì vậy, đây là bài toán phát hiện lời phàn nàn theo định nghĩa corpus, không phải phân loại cảm xúc tích cực/tiêu cực ([bài báo gốc](https://journals.sagepub.com/doi/pdf/10.3233/FAIA210058)).
+
 ## Đối tượng sử dụng và tiêu chí nghiệm thu
 
 Đối tượng sử dụng dự kiến là nhân sự chăm sóc khách hàng hoặc kiểm soát chất lượng tại cửa hàng/sàn thương mại điện tử, dùng kết quả phân loại để ưu tiên review cần con người xem xét. Đây là giả định về bối cảnh sử dụng; nhóm chưa khảo sát người dùng và kết quả chưa chứng minh phù hợp triển khai thực tế.
@@ -36,7 +38,7 @@ Kho mã không phân phối lại corpus hoặc trọng số đã huấn luyện
 
 Trên test 546 mẫu, baseline Linear SVM + Underthesea đạt Macro-F1 **91,74%**. PhoBERT đạt trung bình **92,23% ± 0,29 điểm phần trăm SD mẫu** qua ba lượt huấn luyện. Khoảng bootstrap ghép cặp cho chênh lệch PhoBERT so với baseline chứa 0; thí nghiệm chưa xác nhận PhoBERT vượt trội ổn định.
 
-Kiểm tra bỏ dấu dùng phép biến đổi mô phỏng trên cùng tập test, không phải đánh giá trên dữ liệu thiếu dấu tự nhiên. Phân tích cặp chẩn đoán gồm 18 cặp do nhóm tự soạn và chỉ mang tính thăm dò. Các bảng và biểu đồ tổng hợp nằm trong `results_public/`; chúng không chứa dữ liệu từng review. Bản Word/PDF của nhóm trình bày đầy đủ diễn giải và giới hạn.
+Kiểm tra bỏ dấu dùng phép biến đổi mô phỏng trên cùng tập test, không phải đánh giá trên dữ liệu thiếu dấu tự nhiên. Phân tích cặp chẩn đoán gồm 18 cặp do nhóm tự soạn, bao phủ phủ định, khen kèm bất mãn và sai lệch kỳ vọng. Bộ này chưa có cặp riêng cho ngôn ngữ tiêu cực/xúc phạm nhưng không phải lời phàn nàn mang tính xây dựng, nên chỉ mang tính minh họa, chưa bao quát đầy đủ ranh giới nhãn. Các bảng và biểu đồ tổng hợp nằm trong `results_public/`; chúng không chứa dữ liệu từng review. Bản Word/PDF của nhóm trình bày đầy đủ diễn giải và giới hạn.
 
 
 ### Tăng cường bỏ dấu và tổng quát hóa theo miền
