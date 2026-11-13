@@ -1,6 +1,6 @@
 # Kết quả tổng hợp công khai
 
-Các tệp trong thư mục này được trích từ output Kaggle Run4 version 9 (`COMPLETE`, Tesla T4). Tham chiếu đầy đủ về kernel, dataset, model và hash source có trong `provenance.json`.
+Các tệp trong thư mục này được trích từ output Kaggle Run4 version 10 (`COMPLETE`, Tesla T4). Tham chiếu đầy đủ về kernel, dataset, model và hash source có trong `provenance.json`.
 
 Đây là bảng/biểu đồ tổng hợp để người đọc xem kết quả mà không cần quyền truy cập kernel riêng tư. Thư mục không chứa corpus, văn bản đánh giá, ID dòng test, dự đoán từng dòng, checkpoint, trọng số hay log chạy. Các khoảng tin cậy và phép thử dùng cùng tập test cố định đã được xem ở những vòng trước; chúng là phân tích hậu nghiệm, không phải xác nhận độc lập. Không diễn giải kết quả bỏ dấu mô phỏng như dữ liệu thiếu dấu tự nhiên.
 

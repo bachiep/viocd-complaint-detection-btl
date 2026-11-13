@@ -1,15 +1,23 @@
 {
   "kernel": "hiptetsuya/viocd-phobert-gpu-3seed-run4",
-  "kernel_version": 9,
+  "kernel_version": 10,
   "kernel_status": "COMPLETE",
   "output_files": 77,
-  "source_cell_sha256": "2790a07479525bc2f331fde0494024fbb8288459c17518000bd9ecec76c6f923",
+  "source_cell_sha256": "5c045b243137f54dd5cfbffb5d21726997c9699071ea320d6623cf97e5e4d949",
   "dataset_commit": "25e1851683ebc407d28e5a2d514b7ae0eadd4e4b",
   "model": "vinai/phobert-base",
   "model_revision": "01daacda68afe13d83023d16ec647239e344a1e6",
   "gpu": "Tesla T4",
-  "aggregate_artifacts_generated_utc": "2026-11-13T05:31:49.121349+00:00",
+  "aggregate_artifacts_generated_utc": "2026-11-13T06:46:03+00:00",
   "redaction": "No review text, row IDs, per-example predictions, checkpoints, weights, or run logs are included.",
   "source_hash_method": "SHA-256 of concatenating each source string from all notebook cells in order, without separators.",
-  "notebook_cells": 27
+  "notebook_cells": 27,
+  "demo_smoke_checks": {
+    "blank_and_non_string_inputs_rejected": true,
+    "two_synthetic_examples_completed": true,
+    "long_input_truncation_reported": true,
+    "max_length_tokens": 128,
+    "score_keys_use_complaint_labels": true,
+    "seed_42_checkpoint_cached_with_explicit_release": true
+  }
 }
