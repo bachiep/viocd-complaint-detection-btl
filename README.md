@@ -26,11 +26,11 @@ Kho mã không phân phối lại corpus hoặc trọng số đã huấn luyện
 
 **Cổng trước tái lập:** trang UIT NLP yêu cầu người dùng ký thỏa thuận; tại 13/11/2026 hồ sơ nhóm chưa lưu xác nhận bằng văn bản. Chỉ tải/xử lý corpus hoặc chạy Run All sau khi quyền sử dụng được xác nhận bằng văn bản. Không công khai aggregate mới trước khi quyền chia sẻ được xác nhận riêng. Các aggregate hiện có vẫn truy cập công khai qua repo này; quyền chia sẻ chúng chưa được xác nhận và đây là cổng phát hành đang mở. Nếu điều kiện của UIT không cho phép giữ chúng, sẽ giới hạn quyền truy cập hoặc gỡ phần bị ảnh hưởng.
 
-1. Tạo Kaggle Notebook mới và tải lên `ViOCD_Kaggle_GPU_3seed.ipynb`. Notebook Run5 có thể chạy riêng nếu cần tái tạo phân tích bổ sung.
+1. Tạo Kaggle Notebook mới, giữ notebook ở chế độ **Private**, rồi tải lên `ViOCD_Kaggle_GPU_3seed.ipynb`. Notebook Run5 có thể chạy riêng nếu cần tái tạo phân tích bổ sung; cũng giữ notebook và toàn bộ output ở chế độ riêng tư.
 2. Trong Settings, bật Internet và chọn GPU T4. Notebook được chạy thực tế trên Tesla T4; mỗi tiến trình dùng một GPU.
 3. **Chỉ sau khi quyền sử dụng corpus đã được xác nhận bằng văn bản**, chạy **Run All**. Cell đầu cài các phiên bản pandas 2.3.3, scikit-learn 1.8.0, Underthesea 9.5.0, matplotlib 3.10.8 và transformers 4.51.3. PyTorch/CUDA được cung cấp bởi môi trường Kaggle. Trước khi cổng quyền mở, dừng ở bước đọc hướng dẫn; không tải/xử lý corpus.
 4. Đợi notebook hoàn tất tải dữ liệu và checkpoint. Không cần API token Kaggle hoặc tệp dữ liệu tải lên thủ công.
-5. Tải các thư mục kết quả trong notebook output để kiểm tra metric, dự đoán và log huấn luyện.
+5. Tải kết quả về nơi lưu trữ nội bộ để kiểm tra. Không công khai văn bản review, ID dòng, dự đoán theo từng mẫu, checkpoint hoặc log riêng tư.
 
 ### Phiên bản dữ liệu và mô hình
 
@@ -42,7 +42,7 @@ Kho mã không phân phối lại corpus hoặc trọng số đã huấn luyện
 
 ## Kết quả thực nghiệm
 
-Trên test chính thức 546 mẫu của Run4, baseline Linear SVM + Underthesea đạt Macro-F1 **91,74%**. PhoBERT đạt trung bình **92,23% ± 0,29 điểm phần trăm SD mẫu** qua ba lượt huấn luyện. CI bootstrap ghép cặp cho chênh lệch là **[−1,72; +2,63] điểm phần trăm**, chứa 0. Run4 đã xem test trong các vòng phát triển trước; kết quả là hậu nghiệm, không xác nhận PhoBERT vượt trội ổn định.
+Trên 546 mẫu được giữ lại sau tiền xử lý từ split test chính thức (549 dòng thô) của Run4, baseline Linear SVM + Underthesea đạt Macro-F1 **91,74%**. PhoBERT đạt trung bình **92,23% ± 0,29 điểm phần trăm SD mẫu** qua ba lượt huấn luyện. CI bootstrap ghép cặp cho chênh lệch là **[−1,72; +2,63] điểm phần trăm**, chứa 0. Run4 đã xem test trong các vòng phát triển trước; kết quả là hậu nghiệm, không xác nhận PhoBERT vượt trội ổn định.
 
 ### Run5 — holdout nội bộ train-derived bổ sung
 
@@ -79,7 +79,7 @@ Bài báo gốc: Nguyen và cộng sự (2021), *Vietnamese Complaint Detection 
 
 ## Bằng chứng chạy thực tế
 
-Run4 version 10 đã hoàn tất trên Tesla T4 với ba seed, 546 test rows mỗi seed, dự đoán checkpoint restore trùng hoàn toàn và 77 output files. Demo kiểm tra đầu vào rỗng/không phải chuỗi, hai ví dụ tổng hợp, và review dài 702 token được báo cắt ở giới hạn 128. Run5 v5 đã hoàn tất trên Tesla T4 với ba seed, 624 mẫu, checkpoint restore trùng hoàn toàn và 73 output files; [provenance công khai](results_public/run5_train_holdout_provenance.json) ghi hash nguồn Kaggle, notebook công khai đã làm rõ tài liệu, checksum dữ liệu và các giới hạn phương pháp. Kernel Run4 [riêng tư](https://www.kaggle.com/code/hiptetsuya/viocd-phobert-gpu-3seed-run4) và Run5 [riêng tư](https://www.kaggle.com/code/hiptetsuya/viocd-phobert-fresh-holdout-run5); người chấm cần được chủ tài khoản cấp quyền xem/chạy để kiểm tra log trực tiếp. Mã nguồn và kết quả tổng hợp có thể xem trong repo mà không cần quyền kernel. Repo không chứa corpus, văn bản review, ID dòng, dự đoán từng mẫu, checkpoint, trọng số hay log riêng tư.
+Run4 version 10 đã hoàn tất trên Tesla T4 với ba seed, 546 mẫu test được giữ lại sau tiền xử lý ở mỗi seed, dự đoán checkpoint restore trùng hoàn toàn và 77 output files. Demo kiểm tra đầu vào rỗng/không phải chuỗi, hai ví dụ tổng hợp, và review dài 702 token được báo cắt ở giới hạn 128. Run5 v5 đã hoàn tất trên Tesla T4 với ba seed, 624 mẫu, checkpoint restore trùng hoàn toàn và 73 output files; [provenance công khai](results_public/run5_train_holdout_provenance.json) ghi hash nguồn Kaggle, notebook công khai đã làm rõ tài liệu, checksum dữ liệu và các giới hạn phương pháp. Kernel Run4 [riêng tư](https://www.kaggle.com/code/hiptetsuya/viocd-phobert-gpu-3seed-run4) và Run5 [riêng tư](https://www.kaggle.com/code/hiptetsuya/viocd-phobert-fresh-holdout-run5); người chấm cần được chủ tài khoản cấp quyền xem/chạy để kiểm tra log trực tiếp. Mã nguồn và kết quả tổng hợp có thể xem trong repo mà không cần quyền kernel. Repo không chứa corpus, văn bản review, ID dòng, dự đoán từng mẫu, checkpoint, trọng số hay log riêng tư.
 
 ## Hướng cải tiến đề xuất
 
